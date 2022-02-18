@@ -1,8 +1,22 @@
-# shu-han-training
+# shu-han-training {ignore=true}
 
-This is a learning project with 5 tasks.
+This is a learning project with 6 tasks:
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
+<!-- code_chunk_output -->
+
+- [shu-han-training {ignore=true}](#shu-han-training-ignoretrue)
+    - [5.1 Profile Page](#51-profile-page)
+    - [5.2 Basic Dynamicity of the Page and Actions](#52-basic-dynamicity-of-the-page-and-actions)
+    - [5.3 Basic Rails Application](#53-basic-rails-application)
+    - [5.4 Basic Rails Application - The Models](#54-basic-rails-application---the-models)
+    - [5.5 Basic Rails Application - MVC + Routes](#55-basic-rails-application---mvc--routes)
+    - [5.6 Movie Night Application](#56-movie-night-application)
+
+<!-- /code_chunk_output -->
+---
 ### 5.1 Profile Page
+> see result on git branch: _**dev/task1&2\_\_profile-page**_
 
 Please execute this task using **basic HTML** and **CSS**. The page is intended to be completely **static**.
 
@@ -21,6 +35,8 @@ Please familiarize yourself with the grid and elements positioning
 
 ### 5.2 Basic Dynamicity of the Page and Actions
 
+> see result on git branch: _**dev/task1&2\_\_profile-page**_
+
 Building on the previous task. Add the following features to your page:
 "**Send a Message**" button, which should open a **modal** window. The modal window should allow for filling in "subject" and "message body".
 
@@ -30,11 +46,16 @@ The modal should also have a "**cancel button**" that closes it, plus the "send"
 
 ### 5.3 Basic Rails Application
 
+> see result on git branch: _**dev/task3\_\_agile-web-development**_
+
+![Tutorial product mindset](https://i.imgur.com/SpdCg86.png)
+
 Start working on the "Agile Web Development" book, the intention of this and next couple of exercises is to walk you through:
 
 - Folder structure of the Rails project
 - Understand where familiar HTML, CSS, JS files live in it
 - Show you the basic of the request flow (including routing)
+- Use `RSpec` instead of 
 
 Anything else is beyond this section, please don't be put off if you don't understand something or if you copy commands following the book. The purpose will be met and you will grow knowledge of these core basic concepts mentioned above.
 
@@ -54,6 +75,9 @@ If you want to better prepare for this lesson, or after it read on and better un
 
 In this section I would like you to dive in and understand **routing** and **MVC** inside the Rails application. Before moving in to the task it would be helpful to familiarize yourself with the following section: https://guides.rubyonrails.org/routing.html
 
----
+### 5.6 Movie Night Application
+> see result on git branch: _**dev/task6\_\_vovote**_
 
-(side note: all guides at: guides.rubyonrails.org are amazing and I strongly recommend familiarising yourself with them)
+- First of all, consult with Lukasz (playing role as PM) about the requirements in advance, so we can do a bit of a drawing on piece of paper to better understand different aspects of the app
+- build an app that allows admins (using **ActiveAdmin** gem) to put the videos into the DB
+- We can then have a **movie night session**, where for each session individually people vote for the one they want to watch together. (if the app is built in a generic way - we could also use that for food voting for weeklines - think about it during making your design decisions in the code).
