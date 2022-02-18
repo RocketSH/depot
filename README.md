@@ -1,11 +1,9 @@
-# shu-han-training {ignore=true}
+# shu-han-training
 
 This is a learning project with 6 tasks:
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
-
-- [shu-han-training {ignore=true}](#shu-han-training-ignoretrue)
     - [5.1 Profile Page](#51-profile-page)
     - [5.2 Basic Dynamicity of the Page and Actions](#52-basic-dynamicity-of-the-page-and-actions)
     - [5.3 Basic Rails Application](#53-basic-rails-application)
