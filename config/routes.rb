@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  # chapter 3 tasks
   resources :products
+
+  # chapter 2 task
   get 'say/hello'
   get 'say/goodbye'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
