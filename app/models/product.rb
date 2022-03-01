@@ -2,11 +2,9 @@ class Product < ApplicationRecord
   validates :title, :description, :image_url, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01}
   # default case sensitive doesn't work
-  validates :title, uniqueness: true, length: { minimum: 10 }
+  validates :title, uniqueness: { case_sensitive: true }, length: { minimum: 3 }, format: { with: %r{\A([A-Z]|\d)}, message: 'must begin with first letter Uppercase or Digital number' }
   # use the allow_blank option to avoid getting multiple error messages when the field is blank.
-  validates :image_url, allow_blank: true, format: { with: %r{\.(gif|jpg|png|jpeg)\z}i,
-  message: 'must be a URL for GIF, JPG or PNG image.'
-  }
+  validates :image_url, allow_blank: true, format: { with: %r{\.(gif|jpg|png|jpeg)\z}i, message: 'must be a URL for GIF, JPG or PNG image.' }
 
   private
 
