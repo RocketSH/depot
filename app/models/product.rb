@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  validates :title, :description, :image_url, presence: true
+  validates :title, :description, :image_url, :price, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01}
   # default case sensitive doesn't work
   validates :title, uniqueness: { case_sensitive: true }, length: { minimum: 3 }, format: { with: %r{\A([A-Z]|\d)}, message: 'must begin with first letter Uppercase or Digital number' }
