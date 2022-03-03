@@ -1,0 +1,23 @@
+<h1>Chapter 2: Instant Gratification</h1>
+<h2>Hello from Rails!</h2>
+<p>It is now <%= @time %></p>
+
+<p>Time to say <%=link_to "Goodby", say_goodbye_path %>!</p>
+
+<hr class="dotted">
+
+<h2 class="playtime">Playtime</h2><span>p. 36</span>
+
+<ul>
+  <li>Addition: <%= 1+2 %> </li>
+  <li>Concatenation: <%= "cow" + "boy" %> or <%= "cow" << "boy" %> or <%= "cow".concat("boy") %></li>
+  <li>Time in one hour: <%= 1.hour.from_now.localtime  %> or <%= 1.hour.since.localtime %> or <%= @time + 1.hour %></li>
+</ul>
+
+
+<h4>Folder file list:</h4>
+<ol>
+  <% @files.each do |file| %>
+    <li><%= file %></li>
+  <% end %>
+</ol>
