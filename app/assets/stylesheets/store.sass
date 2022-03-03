@@ -1,0 +1,32 @@
+$button-color: #282
+$button-border-color: #141
+$border-color: #ddd
+$box-shadow: .176em .176em .354em 0 rgba(0,0,0,.75)
+
+.store
+  max-width: 80em
+
+  ul.catalog
+    border-top: solid .25em $border-color
+    list-style: none
+    padding: 0
+    margin: 0
+
+    li
+      padding: 1em
+      margin: 0
+      border-bottom: solid thin $border-color
+      &::after
+        clear: both
+        content: " "
+        display: block
+
+      img
+        float: left
+        padding: 1em
+        margin-right: 1em
+        margin-bottom: 1em
+        box-shadow: $box-shadow
+
+      .price
+        font-size: 1.414em
