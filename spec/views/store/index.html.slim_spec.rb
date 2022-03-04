@@ -1,5 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe "store/index.html.slim", type: :view do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @products = FactoryBot.build_list(:product, 3)
+    assign(:product, @products)
+  end
+
+  it "renders a list of products" do
+    render
+
+    p rendered
+    expect(rendered).to have_selector('ul.catalog')
+    assert_select "ul.catalog li", count: 3
+  end
+    
+  it "if price range between 0.01 to 99.99" do
+    @products.each do |product|
+      expect(product.price.to_s).to match(/\b\d{1,2}\.\d{2}/)
+    end
+  end
 end

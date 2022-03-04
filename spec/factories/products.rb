@@ -4,7 +4,7 @@ FactoryBot.define do
       title { Faker::Books::Dune.title }
       description { Faker::Books::Dune.quote }
       image_url { Faker::Avatar.image + ".jpg" }
-      price { Faker::Number.between(from: 0.49, to: 999) }
+      price { Faker::Number.between(from: 0.01, to: 99).round(2) }
   end
 
   # or specify a product
