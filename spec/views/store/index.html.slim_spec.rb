@@ -16,7 +16,7 @@ RSpec.describe "store/index.html.slim", type: :view do
     
   it "if price range between 0.01 to 99.99" do
     @products.each do |product|
-      expect(product.price.to_s).to match(/\b\d{1,2}\.\d{2}/)
+      expect(product.price.to_s).to match(/\b\d{1,2}\.\d{1,2}/)
     end
   end
 end
