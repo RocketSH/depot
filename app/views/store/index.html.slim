@@ -3,11 +3,13 @@
 
 h1 Your Pragmatic Catalog
 ul.catalog
-  - @products.each do |product|
-    li
-      = image_tag(product.image_url)
-      h2= product.title
-      / sanitize methond is for stripping all but known-safe tags and attributes.
-      p= sanitize(product.description)
-      / .price= sprintf("$%.2f", product.price)
-      .price= number_to_currency(product.price)
+  - cache @products do
+    - @products.each do |product|
+      - cache product do
+        li
+          = image_tag(product.image_url)
+          h2= product.title
+          / sanitize methond is for stripping all but known-safe tags and attributes.
+          p= sanitize(product.description)
+          / .price= sprintf("$%.2f", product.price)
+          .price= number_to_currency(product.price)
