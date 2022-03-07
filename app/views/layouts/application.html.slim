@@ -18,6 +18,8 @@ html
     section.content
       nav.side_nav
         ul
+          li 
+            span= @date.strftime("%b %e %Y %R")
           li
             a href="/" Home
           li
