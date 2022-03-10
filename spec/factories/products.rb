@@ -7,7 +7,7 @@ FactoryBot.define do
       price { Faker::Number.between(from: 0.01, to: 99).round(2) }
   end
 
-  # or specify a product
+  # or specify a single product
   factory :zootopia, class: Product do
     title { "Try Everything" }
     description { "Oh, oh, oh, oh, oh
