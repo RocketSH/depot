@@ -2,4 +2,9 @@
   aside#notice
     = notice
 
-h1 Line Item Show
+h2
+  |  Your Current Cart: 
+  = @cart.id
+ul
+  - @cart.line_items.each do |item|
+    li= item.product.title
