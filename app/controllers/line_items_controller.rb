@@ -5,7 +5,7 @@ class LineItemsController < ApplicationController
 
   def create
     product = Product.find(params[:product_id])
-    # build() will return an object in hash format which not yet been saved 
+    # build a new line item relationship between the @cart object and the product
     @line_item = @cart.line_items.build
     @line_item.product = product
 
@@ -14,6 +14,9 @@ class LineItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def new
   end
 
   def show
