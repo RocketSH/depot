@@ -24,7 +24,6 @@ RSpec.describe Product, type: :model do
       expect(product).to_not be_valid
     end
 
-    
     it "is valid with correc image url suffix" do
       ok = %w{ fred.gif fred.jpg fred.png FRED.JPG FRED.Jpg
         http://a.b.c/x/y/z/fred.gif }
@@ -38,7 +37,7 @@ RSpec.describe Product, type: :model do
     it "is invalid with incorrec image url suffix" do
       bad = %w{ fred.doc fred.gif/more fred.gif.more }
 
-    bad.each do |image_url|
+      bad.each do |image_url|
         product.image_url = image_url
         expect(product).to_not be_valid
       end
@@ -50,7 +49,7 @@ RSpec.describe Product, type: :model do
     end
 
     it "is not valid when price less than 0" do
-      product.price = rand(0..-100000)
+      product.price = rand(0..-100_000)
       expect(product).to_not be_valid
     end
   end
@@ -59,13 +58,12 @@ RSpec.describe Product, type: :model do
     it "fail if line item referencing" do
       zootopia
       cart = Cart.create
-      line_item = LineItem.create(cart_id: cart.id, product_id: zootopia.id)
+      LineItem.create(cart_id: cart.id, product_id: zootopia.id)
 
       expect(zootopia.destroy).to eq(false)
     end
 
     it "destroy successfully" do
-      product
       product.destroy
 
       expect(product).to be_destroyed
