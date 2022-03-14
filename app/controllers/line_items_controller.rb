@@ -1,4 +1,5 @@
 class LineItemsController < ApplicationController
+  # TODO: think about if it is worth including a privacy method
   include CurrentCart
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
@@ -10,6 +11,7 @@ class LineItemsController < ApplicationController
     @line_item.product = product
 
     if @line_item.save
+      reset_counter
       redirect_to @line_item.cart, notice: 'Product was successfully added into your shopping cart.'
     else
       render :new
@@ -32,7 +34,12 @@ class LineItemsController < ApplicationController
   end
 
   private
-    def set_line_item
-      @line_item = LineItem.find(params[:id])
-    end
+
+  def set_line_item
+    @line_item = LineItem.find(params[:id])
+  end
+
+  def reset_counter
+    session[:counter] = 0
+  end
 end
