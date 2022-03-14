@@ -1,17 +1,20 @@
+inherit_gem:
+  prettier: rubocop.yml
+
 AllCops:
-  NewCops: enable
+	NewCops: enable
 
 Style/Documentation:
-  Enabled: false
+	Enabled: false
 
 Style/FrozenStringLiteralComment:
-  Enabled: false
+	Enabled: false
 
 Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    default: ()
-    '%i': '[]'
-    '%I': '[]'
-    '%r': '{}'
-    '%w': '[]'
-    '%W': '[]'
+	PreferredDelimiters:
+		default: ()
+		'%i': '[]'
+		'%I': '[]'
+		'%r': '{}'
+		'%w': '[]'
+		'%W': '[]'
