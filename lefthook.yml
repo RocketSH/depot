@@ -1,9 +1,7 @@
 pre-commit:
-	parallel: true
-	commands:
-		audit:
-			run: brakeman --no-pager
-		rubocop:
-			files: git diff --name-only --staged
-			glob: "*.rb"
-			run: rubocop --force-exclusion {files}
+  parallel: true
+  commands:
+    prettier:
+      files: git diff --name-only --staged
+      glob: "*.rb"
+      run: bundle exec rbprettier --write {files}
