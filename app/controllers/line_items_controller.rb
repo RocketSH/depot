@@ -7,8 +7,7 @@ class LineItemsController < ApplicationController
   def create
     product = Product.find(params[:product_id])
     # build a new line item relationship between the @cart object and the product
-    @line_item = @cart.line_items.build
-    @line_item.product = product
+    @line_item = @cart.add_product(product)
 
     if @line_item.save
       reset_counter

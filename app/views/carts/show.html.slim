@@ -11,4 +11,6 @@ h4
 
 ul
   - @cart.line_items.each do |item|
-    li= item.product.title
+    li
+      = item.quantity 
+      = item.product.title
