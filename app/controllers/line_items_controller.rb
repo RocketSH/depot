@@ -41,4 +41,8 @@ class LineItemsController < ApplicationController
   def reset_counter
     session[:counter] = 0
   end
+
+  def line_item_params
+    params.require(:line_item).permit(:product_id, :cart_id, :quantity)
+  end
 end
