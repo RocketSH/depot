@@ -34,16 +34,28 @@ RSpec.describe 'LineItems', type: :request do
   end
 
   describe 'PATCH /update' do
-    context 'with valid parameters' do
-      subject(:line_item) { create(:line_item) }
-      let(:new_attributes) { { 'quantity' => '10' } }
+    subject(:line_item) { create(:line_item) }
+    subject(:valid_attribute) { { 'quantity' => '10' } }
 
+    context 'with valid parameters' do
       it 'updates the requested line item attribute' do
-        patch line_item_path(line_item), params: { line_item: new_attributes }
+        patch line_item_path(line_item), params: { line_item: valid_attribute }
         line_item.reload
 
         expect(line_item.quantity).to eq(10)
       end
+
+      it 'redirects to the cart' do
+        patch line_item_path(line_item), params: { line_item: valid_attribute }
+        line_item.reload
+
+        expect(response).to redirect_to(line_item.cart)
+      end
     end
+
+    # TODO: context 'with invalid parameters'
+  end
+
+  describe 'DELETE /destroy', pending: true do
   end
 end
