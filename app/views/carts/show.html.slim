@@ -1,0 +1,14 @@
+- if notice
+  aside#notice
+    = notice
+
+h2
+  |  Your Current Cart ID: 
+  = @cart.id
+h4
+  |  Current Line Items Count: 
+  = @cart.line_items.count
+
+ul
+  - @cart.line_items.each do |item|
+    li= item.product.title

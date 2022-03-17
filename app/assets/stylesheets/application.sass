@@ -1,0 +1,83 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import variables
+
+body
+  background-color: $bg-color
+  color: $font-color
+  margin: 0
+  padding: 0
+  font-family: $font-family
+  font-size: $font-size
+  line-height: $line-height
+
+header.main
+  text-align: center
+  @media (min-width: 30em)
+    text-align: left
+    background: $secondary
+    margin: 0
+  h1
+    display: none
+
+.content
+  margin: 0
+  padding: 0
+  display: flex
+  display: -webkit-flex
+  flex-direction: column // mobile is horizontally laid out
+  -webkit-box-orient: vertical
+  -webkit-box-direction: normal
+  @media (min-width: 30em)
+    flex-direction: row // desktop is vertically laid out
+    -webkit-box-orient: horizontal
+
+  nav
+    padding-bottom: 1em
+    background: $primary
+    text-align: center
+    @media (min-width: 30em)
+      text-align: left
+      padding: 1em
+
+    ul
+      // and needs more padding
+      list-style: none
+      margin: 0
+      padding: 0
+      &
+        padding-right: 1em // give desktop some extra space
+      li
+        margin: 0
+        padding: 0.5em
+        text-transform: uppercase
+        letter-spacing: $letter-spacing
+        a
+          color: $primary-contrast
+          text-decoration: none
+        a:hover
+          background: none
+          color: white
+
+        span
+          display: block ruby
+          color: #fff
+          background-color: black
+          text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa,0 0 102px #0fa, 0 0 151px #0fa
+
+  main
+    padding: 0.5em

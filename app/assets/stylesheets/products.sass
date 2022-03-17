@@ -1,0 +1,36 @@
+.products
+  margin: 0
+  padding: .5em
+  a
+    padding: .354em .5em
+    border-radius: .354em
+
+  table
+    border-collapse: collapse
+  td
+    margin: 0
+    padding: .5em
+    &.image
+      display: none
+      @media( min-width: 30em  )
+        display: block
+        img
+          height: 11.3em
+
+    &.description
+      h1
+        font-size: 1.4em
+
+    &.actions
+      ul
+        padding: 0
+        list-style: none
+        li
+          pad: .5em
+
+  tr.list_line_odd
+    background-color: #effeef
+
+  tfoot
+    td
+      padding: .5em 0

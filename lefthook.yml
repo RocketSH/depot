@@ -1,0 +1,7 @@
+pre-commit:
+  parallel: true
+  commands:
+    prettier:
+      files: git diff --name-only --staged
+      glob: "*.rb"
+      run: bundle exec rbprettier --write {files}
