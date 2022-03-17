@@ -26,25 +26,23 @@ RSpec.describe 'LineItems', type: :request do
 
     context 'with invalid/ non-exist product' do
       it 'does not create a new line item' do
-        expect {
+        expect do
           post line_items_path(product_id: invalid_product)
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
 
-  describe 'PATCH /update', pending: true do
+  describe 'PATCH /update' do
     context 'with valid parameters' do
+      subject(:line_item) { create(:line_item) }
       let(:new_attributes) { { 'quantity' => '10' } }
 
       it 'updates the requested line item attribute' do
-        patch line_items_url(line_item), params: { line_item: new_attributes }
+        patch line_item_path(line_item), params: { line_item: new_attributes }
         line_item.reload
-        expect(response).to have_http_status(302)
 
-        cart = Cart.last
-        expect(response).to redirect_to(cart)
-        # skip('Add assertions for updated state')
+        expect(line_item.quantity).to eq(10)
       end
     end
   end

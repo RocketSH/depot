@@ -1,5 +1,4 @@
 class LineItemsController < ApplicationController
-  # TODO: think about if it is worth including a privacy method
   include CurrentCart
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: %i[show edit update destroy]
@@ -18,11 +17,16 @@ class LineItemsController < ApplicationController
     end
   end
 
-  def new; end
-
-  def show; end
-
-  def edit; end
+  def update
+    if @line_item.update(line_item_params)
+      redirect_to @line_item.cart,
+                  notice: 'Product was successfully revised quantity.'
+    else
+      render @line_item.errors
+      redirect_to @line_item.cart,
+                  notice: 'Sorry, product quantity can not be revised.'
+    end
+  end
 
   def destroy
     @line_item.destroy
