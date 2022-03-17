@@ -28,6 +28,8 @@ class LineItemsController < ApplicationController
     end
   end
 
+  # ensure that the user is deleting his or her own cart (think about it!)
+  # to remove the cart from the session before redirecting to the index page with a notification message:
   def destroy
     @line_item.destroy
 
