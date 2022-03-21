@@ -14,4 +14,9 @@ class Cart < ApplicationRecord
 
     current_item
   end
+
+  def amount
+    # leave calculate work to db instead of rails
+    line_items.joins(:product).sum('products.price * line_items.quantity')
+  end
 end
