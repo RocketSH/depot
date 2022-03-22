@@ -7,10 +7,7 @@ RSpec.describe 'store/index.html.slim', type: :view do
   end
 
   it 'renders a list of products' do
-    render
-
-    p rendered
-    expect(rendered).to have_selector('ul.catalog')
+    expect(render).to have_selector('ul.catalog')
     assert_select 'ul.catalog li', count: 3
   end
 
