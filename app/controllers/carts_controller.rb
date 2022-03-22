@@ -4,13 +4,13 @@ class CartsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invaild_cart
 
   def show
-    @cart = Cart.find(params[:id])
+    @cart = Cart.find(params[:id]) until @cart.id == session[:cart_id]
   end
 
   def destroy
     @cart.destroy if @cart.id == session[:cart_id]
     session[:cart_id] = nil
-    redirect_to root_url, notice: "Your cart is currently empty."
+    redirect_to root_url, notice: 'Your cart is currently empty.'
   end
 
   private
