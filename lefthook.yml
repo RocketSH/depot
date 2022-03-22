@@ -5,3 +5,7 @@ pre-commit:
       files: git diff --name-only --staged
       glob: "*.rb"
       run: bundle exec rbprettier --write {files}
+    backend-linter:
+      glob: "*.rb"
+      exclude: "application.rb|routes.rb"
+      run: bundle exec rubocop --force-exclusion {files}
