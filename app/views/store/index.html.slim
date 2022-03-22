@@ -1,7 +1,11 @@
 - if notice
   aside#notice = notice
 
-h1 Your Pragmatic Catalog
+header 
+  h1 Pragmatic Catalog
+  - if session[:cart_id] != nil
+    = link_to image_tag('cart.svg', size: '30', alt: 'go to your shopping cart'), cart_path(session[:cart_id])
+  
 - if @counter && @counter > 5
   p You have accessed this page: #{pluralize(@counter, 'time')}
 ul.catalog

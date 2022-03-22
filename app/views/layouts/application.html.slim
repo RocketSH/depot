@@ -9,7 +9,6 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_pack_tag 'android-chrome-192x192.png', type: 'image/png'
   body
-    / book iteration C2
     header.main
       = link_to image_tag('logo.svg', alt: 'The Pragmatic Bookshelf'), '/' 
       h1
@@ -20,8 +19,6 @@ html
         ul
           li 
             span= Time.now.strftime("%b %e %Y %R")
-          li
-            a href="/" Home
           li
             a href="/questions" Questions
           li

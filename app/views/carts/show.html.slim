@@ -12,9 +12,13 @@ h4
 table
   - @cart.line_items.each do |line_item|
     tr
-      td.quntity= line_item.quantity 
-      td= line_item.product.title
-      td.price= number_to_currency(line_item.subtotal)
+      td.quntity = line_item.quantity 
+      td = line_item.product.title
+      td.price = number_to_currency(line_item.subtotal)
+      td.remove 
+        = image_tag("remove-item.svg", size: '22')
+        span remove item
+      
   tfoot 
     tr 
       th[colspan="2"]
