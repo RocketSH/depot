@@ -1,14 +1,15 @@
 class CartsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: %i[show edit update destroy]
+  before_action :set_cart, only: %i[edit update destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invaild_cart
 
   def show
-    @cart = Cart.find(params[:id]) until @cart.id == session[:cart_id]
+    @cart = Cart.find(session[:cart_id])
+    return if Cart.find(params[:id]) != @cart.id
   end
 
   def destroy
-    @cart.destroy if @cart.id == session[:cart_id]
+    @cart.destroy if @cart.id == session[:cart_id] && !@cart.id = nil
     session[:cart_id] = nil
     redirect_to root_url, notice: 'Your cart is currently empty.'
   end

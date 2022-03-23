@@ -8,6 +8,10 @@ RSpec.describe 'Carts', type: :request do
   describe 'GET /show' do
     context 'with valid cart' do
       it 'renders a successful response' do
+        allow_any_instance_of(ActionDispatch::Request).to receive(:session) {
+          { cart_id: cart.id }
+        }
+
         get cart_path(cart)
         expect(response).to be_successful
       end
