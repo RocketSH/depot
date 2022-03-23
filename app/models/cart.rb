@@ -1,5 +1,4 @@
 class Cart < ApplicationRecord
-  # the existence of each line_item is depentent on the existence of the cart
   has_many :line_items, dependent: :destroy
 
   def add_product(product)
@@ -8,7 +7,9 @@ class Cart < ApplicationRecord
     if current_item
       current_item.quantity += 1
     else
-      current_item = line_items.build(product_id: product.id)
+      # save will be executed in line_items#create
+      current_item =
+        line_items.build(product_id: product.id, price: product.price)
     end
 
     current_item
