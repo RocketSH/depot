@@ -34,12 +34,10 @@ RSpec.describe 'Carts', type: :request do
     context 'with valid cart' do
       it 'destroys current cart' do
         expect(cart.line_items).not_to be_empty
-
         allow_any_instance_of(ActionDispatch::Request).to receive(:session) {
           { cart_id: cart.id }
         }
         delete cart_url(cart)
-
         expect(Cart.find_by(id: cart.id)).to be_nil
       end
 
@@ -52,14 +50,14 @@ RSpec.describe 'Carts', type: :request do
       end
     end
 
-    # TODO: to be refactored, since the mock session  always pass with an invalid cart id
+    # TODO: to be refactored, since the mock session always pass with an invalid cart id
     context 'with invalid cart' do
       it 'destroys an invalid cart' do
         allow_any_instance_of(ActionDispatch::Request).to receive(:session) {
           { cart_id: invalid_cart_test[:id] }
         }
         delete cart_url(invalid_cart_test)
-        expect(response).to redirect_to(root_url)
+        expect(response).to redirect_to(cart_url)
       end
     end
   end

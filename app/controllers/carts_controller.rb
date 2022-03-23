@@ -9,9 +9,13 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    @cart.destroy if @cart.id == session[:cart_id] && !@cart.id = nil
-    session[:cart_id] = nil
-    redirect_to root_url, notice: 'Your cart is currently empty.'
+    if @cart.id != nil && @cart.id == session[:cart_id]
+      @cart.destroy 
+      session[:cart_id] = nil
+      redirect_to "/", notice: 'Your cart is currently deleted.'
+    else
+      redirect_to cart_url
+    end
   end
 
   private
