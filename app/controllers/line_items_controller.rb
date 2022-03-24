@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  before_action :set_cart, only: %i[create destroy]
   before_action :set_line_item, only: %i[show edit update destroy]
 
   def create
@@ -18,13 +18,15 @@ class LineItemsController < ApplicationController
   end
 
   def update
+    # TODO: to be revised
+    @line_item.minus_line_item_qty
+
     if @line_item.update(line_item_params)
       redirect_to @line_item.cart,
                   notice: 'Product was successfully revised quantity.'
     else
-      render @line_item.errors
       redirect_to @line_item.cart,
-                  notice: 'Sorry, product quantity can not be revised.'
+                  notice: 'Sorry, this product quantity can not be revised.'
     end
   end
 
@@ -49,6 +51,6 @@ class LineItemsController < ApplicationController
   end
 
   def line_item_params
-    params.require(:line_item).permit(:product_id, :cart_id, :quantity)
+    params.require(:line_item).permit(:product_id, :cart_id, :quantity, :price)
   end
 end

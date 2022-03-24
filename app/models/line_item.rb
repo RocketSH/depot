@@ -8,4 +8,13 @@ class LineItem < ApplicationRecord
   def subtotal
     product.price * quantity
   end
+
+  def minus_line_item_qty
+    if self.quantity > 1
+      self.quantity -= 1
+    else
+      self.destroy
+    end
+    self.save
+  end
 end

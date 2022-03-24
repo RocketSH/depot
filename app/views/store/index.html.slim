@@ -17,4 +17,4 @@ ul.catalog
           h2 = product.title
           p = sanitize(product.description)
           .price = number_to_currency(product.price, locale: :pl)
-          = button_to "Add to Cart", line_items_path(product_id: product)
+          = button_to "Add to Cart", cart_line_items_path(cart_id: session[:cart_id], product_id: product)

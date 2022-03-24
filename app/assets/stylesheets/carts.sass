@@ -13,10 +13,6 @@
       font-weight: bold
       text-align: right
 
-    &.remove
-      span
-        margin: 0 .5rem .5rem
-
 tfoot
   td, th.price
     font-weight: bold
@@ -40,4 +36,18 @@ input[type="submit"]
     background-color: $secondary
     border: solid thin $secondary
     color: white
-    transition: ease-in-out .2s
+    transition: $transition
+td
+  a
+    display: flex
+    text-decoration: none
+    border: 1px solid grey
+    border-radius: 30px
+    padding: .3rem .5rem .1rem
+    color: black
+    &:hover
+      background-color: lighten($font-color, 70%)
+      transition: $transition
+
+    img
+      margin-right: .5rem
