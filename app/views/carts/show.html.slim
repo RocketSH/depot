@@ -18,8 +18,7 @@ table
       td = line_item.product.title
       td.price = number_to_currency(line_item.subtotal)
       td.update-item
-        / to be figure out how params wrok here& fix feature
-        = link_to cart_line_item_path(@cart, line_item, params: { line_item: {quantity: line_item.quantity} }), method: :put
+        = link_to cart_line_item_path(@cart, line_item), method: :put
           span = image_tag("remove-item.svg", size: '20')
           span Qty -1
       

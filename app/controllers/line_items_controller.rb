@@ -18,10 +18,7 @@ class LineItemsController < ApplicationController
   end
 
   def update
-    # TODO: to be revised
-    @line_item.minus_line_item_qty
-
-    if @line_item.update(line_item_params)
+    if @line_item.minus_line_item_qty
       redirect_to @line_item.cart,
                   notice: 'Product was successfully revised quantity.'
     else

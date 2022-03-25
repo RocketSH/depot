@@ -12,9 +12,9 @@ class LineItem < ApplicationRecord
   def minus_line_item_qty
     if self.quantity > 1
       self.quantity -= 1
+      self.save
     else
       self.destroy
     end
-    self.save
   end
 end
