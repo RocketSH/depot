@@ -5,9 +5,7 @@ header
   h1 Pragmatic Catalog
   - if session[:cart_id] != nil
     = link_to image_tag('cart.svg', size: '30', alt: 'go to your shopping cart'), cart_path(session[:cart_id])
-  
-- if @counter && @counter > 5
-  p You have accessed this page: #{pluralize(@counter, 'time')}
+  p = session_counter_greater_than_five(session[:counter])
 ul.catalog
   - cache @products do
     - @products.each do |product|
@@ -17,4 +15,4 @@ ul.catalog
           h2 = product.title
           p = sanitize(product.description)
           .price = number_to_currency(product.price, locale: :pl)
-          = button_to "Add to Cart", cart_line_items_path(cart_id: session[:cart_id], product_id: product)
+          = button_to "Add to Cart", line_items_path(product_id: product)
