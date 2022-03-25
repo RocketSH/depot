@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'LineItems', type: :request do
-  let(:valid_product) { create(:product) }
-  let(:invalid_product) { { 'id' => 'a', 'title' => '1', 'description' => '' } }
-  let(:zootopia) { create(:zootopia) }
+  subject(:valid_product) { create(:product) }
+  subject(:invalid_product) do
+    { 'id' => 'a', 'title' => '1', 'description' => '' }
+  end
+  subject(:zootopia) { create(:zootopia) }
 
   describe 'POST /create' do
     context 'with valid product' do
@@ -43,28 +45,24 @@ RSpec.describe 'LineItems', type: :request do
   end
 
   describe 'PATCH /update' do
-    subject(:line_item) { create(:line_item) }
-    subject(:valid_attribute) { { 'quantity' => '10' } }
-
     context 'with valid parameters' do
-      it 'updates the requested line item attribute' do
-        patch line_item_path(line_item), params: { line_item: valid_attribute }
+      it 'line item quantity minus 1& redirects to the cart' do
+        line_item = create(:line_item, quantity: 5)
+        put line_item_path(line_item)
         line_item.reload
-
-        expect(line_item.quantity).to eq(10)
-      end
-
-      it 'redirects to the cart' do
-        patch line_item_path(line_item), params: { line_item: valid_attribute }
-        line_item.reload
-
         expect(response).to redirect_to(line_item.cart)
+        expect(line_item.quantity).to eq(4)
       end
     end
-
-    # TODO: context 'with invalid parameters'
   end
 
-  describe 'DELETE /destroy', pending: true do
+  describe 'DELETE /destroy' do
+    it 'destroys the requested line_item when qty == 1' do
+      line_item = create(:line_item)
+      p line_item
+      expect { put line_item_path(line_item) }.to change(LineItem, :count).by(
+        -1
+      )
+    end
   end
 end
