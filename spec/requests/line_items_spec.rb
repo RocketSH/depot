@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'LineItems', type: :request do
   let(:valid_product) { create(:product) }
   let(:invalid_product) { { 'id' => 'a', 'title' => '1', 'description' => '' } }
+  let(:zootopia) { create(:zootopia) }
 
   describe 'POST /create' do
     context 'with valid product' do
@@ -21,6 +22,14 @@ RSpec.describe 'LineItems', type: :request do
 
         cart = Cart.last
         expect(response).to redirect_to(cart)
+      end
+
+      it 'add duplicate products to a cart' do
+        5.times { post line_items_path(product_id: zootopia) }
+
+        zoo_cart = Cart.last
+        expect(zoo_cart.line_items.count).to eq(1)
+        expect(zoo_cart.line_items.first['quantity']).to eq(5)
       end
     end
 
