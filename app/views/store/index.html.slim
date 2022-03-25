@@ -1,7 +1,7 @@
 - if notice
   aside#notice = notice
 
-header 
+header
   h1 Pragmatic Catalog
   - if session[:cart_id] != nil
     = link_to image_tag('cart.svg', size: '30', alt: 'go to your shopping cart'), cart_path(session[:cart_id])
