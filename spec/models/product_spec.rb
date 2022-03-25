@@ -62,11 +62,10 @@ RSpec.describe Product, type: :model do
 
   context 'destroy product' do
     it 'fail if line item referencing' do
-      zootopia
-      cart = Cart.create
-      LineItem.create(cart_id: cart.id, product_id: zootopia.id)
+      line_item = create(:line_item)
+      product = Product.find(line_item.product_id)
 
-      expect(zootopia.destroy).to eq(false)
+      expect(product.destroy).to eq(false)
     end
 
     it 'destroy successfully' do
