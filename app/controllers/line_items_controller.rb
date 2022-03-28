@@ -9,9 +9,7 @@ class LineItemsController < ApplicationController
 
     if @line_item.save
       reset_counter
-      redirect_to @line_item.cart,
-                  notice:
-                    'Product was successfully added into your shopping cart.'
+      redirect_to @line_item.cart, notice: 'Product was successfully added into your shopping cart.'
     else
       render :new
     end
@@ -19,11 +17,9 @@ class LineItemsController < ApplicationController
 
   def update
     if @line_item.minus_line_item_qty
-      redirect_to @line_item.cart,
-                  notice: 'Product was successfully revised quantity.'
+      redirect_to @line_item.cart, notice: 'Product was successfully revised quantity.'
     else
-      redirect_to @line_item.cart,
-                  notice: 'Sorry, this product quantity can not be revised.'
+      redirect_to @line_item.cart, notice: 'Sorry, this product quantity can not be revised.'
     end
   end
 
@@ -32,9 +28,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy
 
-    redirect_to @cart,
-                notice:
-                  'Product was successfully removed from your shopping cart.'
+    redirect_to @cart, notice: 'Product was successfully removed from your shopping cart.'
   end
 
   private

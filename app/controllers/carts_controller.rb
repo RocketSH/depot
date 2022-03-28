@@ -10,11 +10,11 @@ class CartsController < ApplicationController
 
   def destroy
     if @cart.id != nil && @cart.id == session[:cart_id]
-      @cart.destroy 
+      @cart.destroy
       session[:cart_id] = nil
-      redirect_to "/", notice: 'Your cart is currently deleted.'
+      redirect_to '/', notice: 'Your cart is currently deleted.'
     else
-      redirect_to cart_url
+      redirect_to cart_url, notice: 'Sorry, this cart not found for deletion.'
     end
   end
 
