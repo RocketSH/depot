@@ -39,8 +39,10 @@ group :development, :test do
   gem 'faker'
   gem 'prettier'
   gem 'pry', '~> 0.13.1'
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'rubocop', '~> 1.26', require: false
+  gem 'slim_lint', '~> 0.22.1'
 end
 
 group :development do

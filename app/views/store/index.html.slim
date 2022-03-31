@@ -1,17 +1,18 @@
 - if notice
-  aside#notice= notice
+  aside#notice = notice
 
-h1 Your Pragmatic Catalog
-- if @counter > 5
-  p You have accessed this page: #{pluralize(@counter, 'time')}
+header
+  h1 Pragmatic Catalog
+  - if session[:cart_id] != nil
+    = link_to image_tag('cart.svg', size: '30', alt: 'go to your shopping cart'), cart_path(session[:cart_id])
+  p = session_counter_greater_than_five(session[:counter])
 ul.catalog
   - cache @products do
     - @products.each do |product|
       - cache product do
         li
           = image_tag(product.image_url)
-          h2= product.title
-          / sanitize methond is for stripping all but known-safe tags and attributes.
-          p= sanitize(product.description)
-          .price=  number_to_currency(product.price, locale: :pl)
-          = button_to  "Add to Cart", line_items_path(product_id: product)
+          h2 = product.title
+          p = sanitize(product.description)
+          .price = number_to_currency(product.price, locale: :pl)
+          = button_to "Add to Cart", line_items_path(product_id: product)

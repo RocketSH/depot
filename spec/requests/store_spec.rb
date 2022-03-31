@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe "Stores", type: :request do
-  describe "GET /index" do
-    it "returns http success" do
-      get "/"
+RSpec.describe 'Stores', type: :request do
+  describe 'GET /index' do
+    it 'returns http success' do
+      get '/'
 
       expect(response).to have_http_status(:success)
-      assert_select ".side_nav a", minimum: 4
+      assert_select '.side_nav a', minimum: 3
     end
   end
 end
