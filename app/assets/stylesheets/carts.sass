@@ -1,0 +1,53 @@
+@import variables
+
+.carts
+  table
+    border-collapse: collapse
+  td
+    padding: 0.5em
+    &.quantity
+      white-space: nowrap
+      &::after
+        content: "&times;"
+    &.price
+      font-weight: bold
+      text-align: right
+
+tfoot
+  td, th.price
+    font-weight: bold
+    padding-top: 1em
+
+  th
+    text-align: right
+
+  td.price
+    border-top: solid thin #000
+
+input[type="submit"]
+  margin-top: 1rem
+  background-color: lighten($primary-contrast, 10%)
+  border-radius: 0.354em
+  border: solid thin $secondary
+  color: $secondary
+  font-size: 1em
+  padding: 0.5rem 1em
+  &:hover
+    background-color: $secondary
+    border: solid thin $secondary
+    color: white
+    transition: $transition
+td
+  a
+    display: flex
+    text-decoration: none
+    border: 1px solid grey
+    border-radius: 30px
+    padding: .3rem .5rem .1rem
+    color: black
+    &:hover
+      background-color: lighten($font-color, 70%)
+      transition: $transition
+
+    img
+      margin-right: .5rem

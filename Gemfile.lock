@@ -152,6 +152,10 @@ GEM
       bundler (>= 1.3.0)
       railties (= 6.0.4.6)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -223,6 +227,9 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 5.0)
+    slim_lint (0.22.1)
+      rubocop (>= 0.78.0)
+      slim (>= 3.0, < 5.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -285,11 +292,13 @@ DEPENDENCIES
   pry (~> 0.13.1)
   puma (~> 4.1)
   rails (~> 6.0.1)
+  rails-controller-testing
   rspec-rails
   rubocop (~> 1.26)
   sass-rails (>= 6)
   selenium-webdriver
   slim-rails
+  slim_lint (~> 0.22.1)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
