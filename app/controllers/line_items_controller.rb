@@ -9,7 +9,7 @@ class LineItemsController < ApplicationController
 
     if @line_item.save
       reset_counter
-      redirect_to @line_item.cart, notice: 'Product was successfully added into your shopping cart.'
+      redirect_to root_url, notice: 'Product was successfully added into your shopping cart.'
     else
       render :new
     end
