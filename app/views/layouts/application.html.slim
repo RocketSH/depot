@@ -25,6 +25,8 @@ html
             a href="/news" News
           li
             a href="/contact" Contact
+        #cart.carts
+          = render @cart
 
       main class=controller.controller_name
         = yield
