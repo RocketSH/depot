@@ -2,3 +2,7 @@ tr
   td.quntity = line_item.quantity 
   td = line_item.product.title
   td.price = number_to_currency(line_item.subtotal, locale: :pl)
+  td.update-item
+    = link_to line_item_path(line_item), method: :put
+      span = image_tag("remove-item.svg", size: '20')
+      span Qty -1
