@@ -1,4 +1,5 @@
-tr
+/ TODO: @current_item can't get value
+tr class=( line_item == @current_item ? '.line-item-highlight' : '')
   td.quntity = line_item.quantity 
   td = line_item.product.title
   td.price = number_to_currency(line_item.subtotal, locale: :pl)

@@ -8,8 +8,9 @@ class LineItemsController < ApplicationController
     @line_item = @cart.add_product(product)
 
     if @line_item.save
+      @current_item = @line_item
       reset_counter
-      redirect_to root_url, notice: 'Product was successfully added into your shopping cart.'
+      redirect_to root_url
     else
       render :new
     end
