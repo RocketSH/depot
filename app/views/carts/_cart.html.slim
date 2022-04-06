@@ -6,9 +6,6 @@ article
   h2
     | Your Current Cart ID:
     = cart.id
-  h4
-    | Current Line Items Count:
-    = cart.line_items.count
 
   table
     = render(cart.line_items)

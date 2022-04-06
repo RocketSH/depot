@@ -5,11 +5,11 @@ class LineItemsController < ApplicationController
 
   def create
     product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product)
+    line_item = @cart.add_product(product)
 
-    if @line_item.save
-      @current_item = @line_item
+    if line_item.save
       reset_counter
+      session[:line_item_id] = line_item.id
       redirect_to root_url
     else
       render :new
