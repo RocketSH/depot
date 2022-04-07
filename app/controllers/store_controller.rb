@@ -1,11 +1,10 @@
 class StoreController < ApplicationController
-  include CurrentCart
-  before_action :set_cart
   before_action :increment_counter
   before_action :current_line_item
 
   def index
     @products = Product.order(:title)
+    @cart = Cart.find(session[:cart_id]) if session[:cart_id]
   end
 
   private
@@ -15,6 +14,8 @@ class StoreController < ApplicationController
   end
 
   def current_line_item
-    @current_line_item ||= session[:line_item_id] && LineItem.find(session[:line_item_id])
+    if session[:line_item_id]
+      @current_line_item ||= session[:line_item_id] && LineItem.find(session[:line_item_id])
+    end
   end
 end

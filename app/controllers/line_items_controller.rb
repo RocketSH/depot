@@ -28,6 +28,7 @@ class LineItemsController < ApplicationController
   # to remove the cart from the session before redirecting to the index page with a notification message:
   def destroy
     @line_item.destroy
+    session[:line_item_id] = nil
 
     redirect_to @cart, notice: 'Product was successfully removed from your shopping cart.'
   end

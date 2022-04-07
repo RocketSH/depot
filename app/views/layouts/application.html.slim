@@ -26,8 +26,10 @@ html
           li
             a href="/contact" Contact
         - if @cart
+          li
+            span = session[:cart_id]
           #cart.carts
-            = render @cart
+            = render_if @cart && @cart.line_items.any?, @cart
 
       main class=controller.controller_name
         = yield
