@@ -1,6 +1,7 @@
 class StoreController < ApplicationController
+  include CurrentLineItem
   before_action :increment_counter
-  before_action :current_line_item
+  before_action :set_current_line_item
 
   def index
     @products = Product.order(:title)
@@ -11,11 +12,5 @@ class StoreController < ApplicationController
 
   def increment_counter
     @counter = session[:counter] = (session[:counter] || 0) + 1
-  end
-
-  def current_line_item
-    if session[:line_item_id]
-      @current_line_item ||= session[:line_item_id] && LineItem.find(session[:line_item_id])
-    end
   end
 end
