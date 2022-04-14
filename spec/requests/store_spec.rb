@@ -14,7 +14,7 @@ RSpec.describe 'Stores', type: :request do
     subject(:product) { create(:product) }
     it 'updates the quantity' do
       post line_items_path(product_id: product), xhr: true
-      expect(response).to redirect_to(root_url)
+      expect(response.body).to include('carts')
     end
   end
 end
