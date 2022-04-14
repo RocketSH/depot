@@ -1,17 +1,27 @@
 @import variables
 
 .carts
-  table
-    border-collapse: collapse
-  td
-    padding: 0.5em
-    &.quantity
-      white-space: nowrap
-      &::after
-        content: "&times;"
-    &.price
-      font-weight: bold
-      text-align: right
+  article
+    background: white
+    border-radius: .5em
+    margin: 1em
+    padding: 1.414em
+    @media (min-width: 30em)
+      margin: 0
+
+    h2
+      margin-top: 0
+    table
+      border-collapse: collapse
+    td
+      padding: 0.5em
+      &.quantity
+        white-space: nowrap
+        &::after
+          content: "&times;"
+      &.price
+        font-weight: bold
+        text-align: right
 
 tfoot
   td, th.price

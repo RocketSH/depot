@@ -1,0 +1,9 @@
+li = document.querySelector('.carts')
+if (li == null) {
+  li = document.createElement('div')
+  li.classList.add('carts')
+}
+
+cart = document.querySelector('.side_nav')
+li.innerHTML = "<%= j render(@cart) %>"
+cart.appendChild(li)

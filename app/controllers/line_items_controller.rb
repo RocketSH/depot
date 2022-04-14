@@ -1,5 +1,5 @@
 class LineItemsController < ApplicationController
-  include CurrentCart
+include CurrentCart
   before_action :set_cart, only: %i[create destroy]
   before_action :set_line_item, only: %i[show edit update destroy]
 
@@ -7,12 +7,15 @@ class LineItemsController < ApplicationController
     product = Product.find(params[:product_id])
     line_item = @cart.add_product(product)
 
-    if line_item.save
-      reset_counter
-      session[:line_item_id] = line_item.id
-      redirect_to root_url
-    else
-      render :new
+    respond_to do |format|
+      if line_item.save
+        format.html { redirect_to root_url }
+        format.js
+        reset_counter
+        session[:line_item_id] = line_item.id
+      else
+        format.html { render :new }
+      end
     end
   end
 

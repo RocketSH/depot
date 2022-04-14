@@ -28,7 +28,7 @@ html
         - if @cart
           li
             span = session[:cart_id]
-          #cart.carts
+          .carts
             = render_if @cart && @cart.line_items.any?, @cart
 
       main class=controller.controller_name
