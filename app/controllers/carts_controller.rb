@@ -1,7 +1,5 @@
 class CartsController < ApplicationController
   include CurrentCart
-  include CurrentLineItem
-  before_action :set_current_line_item, only: :show
   before_action :set_cart, only: %i[edit update destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invaild_cart
 

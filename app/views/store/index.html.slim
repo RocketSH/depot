@@ -1,10 +1,5 @@
-- if notice
-  aside#notice = notice
-
 header
   h1 Pragmatic Catalog
-  - if session[:cart_id] != nil
-    = link_to image_tag('cart.svg', size: '30', alt: 'go to your shopping cart'), cart_path(session[:cart_id])
   p = session_counter_greater_than_five(session[:counter])
 ul.catalog
   - cache @products do

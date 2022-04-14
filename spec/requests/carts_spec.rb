@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Carts', type: :request do
-  # every cart has 3 line items once created from factorybot
+  # every cart has 2 line items once created from factorybot
   let(:cart) { create(:cart) }
   let(:invalid_cart_test) { { id: 'not_a_valid_id' } }
 

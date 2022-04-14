@@ -1,7 +1,5 @@
 class StoreController < ApplicationController
-  include CurrentLineItem
   before_action :increment_counter
-  before_action :set_current_line_item
 
   def index
     @products = Product.order(:title)
