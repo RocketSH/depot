@@ -1,3 +1,4 @@
+//  All channels you create will import this file and use 'consumer' to create a subscription to the server.
 import consumer from "./consumer";
 
 consumer.subscriptions.create("ProductsChannel", {
@@ -14,7 +15,8 @@ consumer.subscriptions.create("ProductsChannel", {
     const storeElement = document.querySelector("main.store");
     if (storeElement) {
       storeElement.innerHTML = data.html;
-      storeElement.classList.add("line-item-highlight");
+      const new_product = document.querySelector("ul.catalog>li");
+      new_product.classList.add("line-item-highlight");
     }
   },
 });

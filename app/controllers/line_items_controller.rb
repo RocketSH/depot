@@ -1,6 +1,7 @@
 class LineItemsController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: %i[create destroy]
+  before_action :set_line_item, only: %i[update destroy]
 
   def create
     product = Product.find(params[:product_id])

@@ -50,7 +50,7 @@ RSpec.describe 'LineItems', type: :request do
         line_item = create(:line_item, quantity: 5)
         put line_item_path(line_item)
         line_item.reload
-        expect(response).to redirect_to(line_item.cart)
+        expect(response).to redirect_to(root_url)
         expect(line_item.quantity).to eq(4)
       end
     end
