@@ -25,6 +25,8 @@ html
             a href="/news" News
           li
             a href="/contact" Contact
+          .carts
+            = render_if @cart && @cart.line_items.any?, @cart
 
       main class=controller.controller_name
         = yield

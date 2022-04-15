@@ -14,3 +14,11 @@ require("channels");
 //
 const images = require.context("../images", true);
 // const imagePath = (name) => images(name, true)
+
+function hideNotice() {
+  setInterval(() => {
+   document.getElementById("notice").style.display = "none";
+  }, 5000);
+}
+
+hideNotice();

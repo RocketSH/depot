@@ -1,17 +1,27 @@
 @import variables
 
 .carts
-  table
-    border-collapse: collapse
-  td
-    padding: 0.5em
-    &.quantity
-      white-space: nowrap
-      &::after
-        content: "&times;"
-    &.price
-      font-weight: bold
-      text-align: right
+  margin-top: 2em
+  article
+    background: white
+    border-radius: .5em
+    padding: 1.414em
+    @media (min-width: 30em)
+      margin: 0
+
+    h2
+      margin-top: 0
+    table
+      border-collapse: collapse
+    td
+      padding: 0.5em
+      &.quantity
+        white-space: nowrap
+        &::after
+          content: "&times;"
+      &.price
+        font-weight: bold
+        text-align: right
 
 tfoot
   td, th.price
@@ -37,7 +47,7 @@ input[type="submit"]
     border: solid thin $secondary
     color: white
     transition: $transition
-td
+td.update-item
   a
     display: flex
     text-decoration: none
@@ -45,6 +55,8 @@ td
     border-radius: 30px
     padding: .3rem .5rem .1rem
     color: black
+    align-content: center
+    align-items: center
     &:hover
       background-color: lighten($font-color, 70%)
       transition: $transition

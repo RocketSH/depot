@@ -8,8 +8,7 @@ class Cart < ApplicationRecord
       current_item.quantity += 1
     else
       # save will be executed in line_items#create
-      current_item =
-        line_items.build(product_id: product.id, price: product.price)
+      current_item = line_items.build(product_id: product.id, price: product.price)
     end
 
     current_item

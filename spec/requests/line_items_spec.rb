@@ -12,18 +12,18 @@ RSpec.describe 'LineItems', type: :request do
       it 'creates a new line item' do
         expect { post line_items_path(product_id: valid_product) }.to change(
           LineItem,
-          :count
+          :count,
         ).by(1)
       end
 
-      it 'redirects to the cart show' do
+      it 'redirects to the homepage' do
         post line_items_path(product_id: valid_product)
 
         # 302 redirect: temporarily moved
         expect(response).to have_http_status(302)
 
         cart = Cart.last
-        expect(response).to redirect_to(cart)
+        expect(response).to redirect_to(root_url)
       end
 
       it 'add duplicate products to a cart' do
@@ -50,7 +50,7 @@ RSpec.describe 'LineItems', type: :request do
         line_item = create(:line_item, quantity: 5)
         put line_item_path(line_item)
         line_item.reload
-        expect(response).to redirect_to(line_item.cart)
+        expect(response).to redirect_to(root_url)
         expect(line_item.quantity).to eq(4)
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe 'LineItems', type: :request do
       line_item = create(:line_item)
       p line_item
       expect { put line_item_path(line_item) }.to change(LineItem, :count).by(
-        -1
+        -1,
       )
     end
   end
