@@ -25,7 +25,6 @@ html
             a href="/news" News
           li
             a href="/contact" Contact
-        - if @cart
           .carts
             = render_if @cart && @cart.line_items.any?, @cart
 

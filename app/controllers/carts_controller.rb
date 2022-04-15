@@ -9,7 +9,7 @@ class CartsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      if @cart.id != nil && @cart.id == session[:cart_id]
+      if @cart && @cart.id == session[:cart_id]
         @cart.destroy
         session[:cart_id] = nil
         format.html { redirect_to '/', notice: 'Your cart is currently deleted.' }

@@ -9,9 +9,9 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
+        reset_counter
         format.html { redirect_to root_url }
         format.js { @current_item = @line_item }
-        reset_counter
       else
         format.html { render :new }
       end

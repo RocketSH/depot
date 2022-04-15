@@ -7,3 +7,8 @@ if (li == null) {
 cart = document.querySelector('.side_nav')
 li.innerHTML = "<%= j render(@cart) %>"
 cart.appendChild(li)
+
+session_counter = document.querySelector('header>p')
+if (session_counter) {
+  session_counter.remove()
+}
