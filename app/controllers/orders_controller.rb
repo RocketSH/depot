@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
     if session[:cart_id]
       @cart = Cart.find(session[:cart_id])
     else
-      redirect_to root_url
+      redirect_to root_url, notice: "Your cart is empty."
     end
   end
 
