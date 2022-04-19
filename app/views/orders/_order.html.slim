@@ -1,0 +1,12 @@
+ul
+  li Name
+  = order.name
+  li Address
+  = order.address
+  li Email
+  = order.email
+  li Payment method
+  = order.pay_type
+  li
+  = link_to "Edit", edit_order_path(order)
+  = link_to "Delete Order", order_path(order), method: "delete", data: { confirm: "Are you sure?" }

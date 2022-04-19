@@ -30,16 +30,18 @@ body
 
 header.main
   text-align: center
+  background: $secondary
   @media (min-width: 30em)
     text-align: left
-    background: $secondary
     margin: 0
+    position: fixed
+    width: 100%
+    height: 4.56rem
   h1
     display: none
 
 .content
   margin: 0
-  padding: 0
   display: flex
   display: -webkit-flex
   flex-direction: column // mobile is horizontally laid out
@@ -48,23 +50,20 @@ header.main
   @media (min-width: 30em)
     flex-direction: row // desktop is vertically laid out
     -webkit-box-orient: horizontal
-    height: 100%
+    padding-top: 4.56rem
+    height: calc( 100% - 4.56rem)
 
   nav
-    padding-bottom: 1em
+    padding: 1em 1em 3em
     background: $primary
     text-align: center
     @media (min-width: 30em)
       text-align: left
-      padding: 1em
 
     ul
-      // and needs more padding
       list-style: none
       margin: 0
       padding: 0
-      &
-        padding-right: 1em // give desktop some extra space
       li
         margin: 0
         padding: 0.5em

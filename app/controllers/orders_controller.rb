@@ -3,10 +3,34 @@ class OrdersController < ApplicationController
   before_action :ensure_cart_isnt_empty, only: :new
   before_action :set_order, only: %i[show edit update destroy]
 
-  def create
+  def new
+    @order = Order.new
   end
 
-  def new
+  def create
+    @order = Order.new(order_params)
+
+    if @order.save
+      redirect_to order_url(@order), notice: 'Your order was successfully created.'
+    end
+  end
+
+  def edit
+    @order = Order.find(params[:id])
+  end
+
+  def update
+    if @order.update(order_params)
+      redirect_to order_url(@order),
+                  notice: 'Your order was successfully updated.'
+    else
+      render @order.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @order.destroy
+    redirect_to root_url
   end
 
   private
@@ -15,7 +39,7 @@ class OrdersController < ApplicationController
     if session[:cart_id]
       @cart = Cart.find(session[:cart_id])
     else
-      redirect_to root_url, notice: "Your cart is empty."
+      redirect_to root_url, notice: 'Your cart is empty.'
     end
   end
 
@@ -25,7 +49,11 @@ class OrdersController < ApplicationController
 
   def ensure_cart_isnt_empty
     if @cart.line_items.empty?
-      redirect_to root_url, notice: "Your cart is empty."
+      redirect_to root_url, notice: 'Your cart is empty.'
     end
+  end
+
+  def order_params
+    params.require(:order).permit(:name, :address, :email, :pay_type)
   end
 end
