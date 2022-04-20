@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
                   notice: 'Your order was successfully updated.'
     else
       render @order.errors, status: :unprocessable_entity
+      render :new
     end
   end
 
