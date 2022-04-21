@@ -9,9 +9,14 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.add_line_items_from_cart(@cart)
 
     if @order.save
-      redirect_to order_url(@order), notice: 'Your order was successfully created.'
+      Cart.destroy(session[:cart_id])
+      session[:cart_id] = nil
+      redirect_to root_url, notice: 'Thank you for your order.'
+    else
+      render :new
     end
   end
 
