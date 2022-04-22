@@ -4,8 +4,10 @@ class LineItem < ApplicationRecord
   belongs_to :cart, optional: true
   belongs_to :order, optional: true
 
-  validates :cart_id, :product_id, :price, presence: true
+  validates :product_id, :price, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
+  validates :cart_id, presence: true, if: -> { :order_id.nil? }
+  validates :order_id, presence: true, if: -> { :cart_id.nil? }
 
   def subtotal
     product.price * quantity

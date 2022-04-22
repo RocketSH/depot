@@ -22,7 +22,6 @@ RSpec.describe 'Orders', type: :request do
         empty_cart.save
         get new_order_url, params: { id: empty_cart[:id] }
 
-        # binding.pry
         expect(response).to redirect_to(root_url)
         follow_redirect!
         expect(response).to render_template('store/index')
@@ -34,15 +33,21 @@ RSpec.describe 'Orders', type: :request do
   describe 'POST /create' do
     context 'with valid order' do
       it 'creates a order' do
-        # allow_any_instance_of(ActionDispatch::Request).to receive(:session) {
-        #   { cart_id: cart.id }
-        # }
+        allow_any_instance_of(ActionDispatch::Request).to receive(:session) {
+          { cart_id: cart.id }
+        }
 
-        post orders_path(order)
-        # expect { post orders_path(order) }.to change(
-        #   Order,
-        #   :count,
-        # ).by(1)
+        expect do
+          post orders_path(@cart),
+               params: {
+                 order: {
+                   name: order.name,
+                   address: order.address,
+                   email: order.email,
+                   pay_type: order.pay_type,
+                 },
+               }
+        end.to change(Order, :count).by(1)
       end
 
       it 'redirects to the homepage' do

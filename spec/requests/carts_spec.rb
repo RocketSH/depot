@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Carts', type: :request do
-  # let(:cart) { create(:cart) }
-  let(:cart) { Cart.create } 
+  let(:cart) { create(:cart) }
   let(:product_one) { create(:zootopia) }
   let(:product_two) { create(:product) }
   let(:invalid_cart_test) { { id: 'not_a_valid_id' } }
@@ -31,7 +30,7 @@ RSpec.describe 'Carts', type: :request do
         follow_redirect!
         expect(response).to render_template('store/index')
         expect(response.body).to include(
-          'Sorry, you are querying an invalid cart'
+          'Sorry, you are querying an invalid cart',
         )
       end
     end
