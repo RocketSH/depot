@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :line_item do
     product
-    cart || order
+    cart
 
     price { product.price }
   end

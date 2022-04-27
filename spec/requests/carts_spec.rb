@@ -30,7 +30,7 @@ RSpec.describe 'Carts', type: :request do
         follow_redirect!
         expect(response).to render_template('store/index')
         expect(response.body).to include(
-          'Sorry, you are querying an invalid cart',
+          'Sorry, you are querying an invalid cart'
         )
       end
     end

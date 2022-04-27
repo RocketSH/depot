@@ -9,15 +9,15 @@ class Product < ApplicationRecord
   # default case sensitive doesn't work
   validates :title,
             uniqueness: {
-              case_sensitive: true,
+              case_sensitive: true
             },
             length: {
-              minimum: 3,
+              minimum: 3
             },
             format: {
               with: /\A([A-Z]|\d)/,
               message:
-                'must begin with first letter Uppercase or Digital number',
+                'must begin with first letter Uppercase or Digital number'
             }
 
   # use the allow_blank option to avoid getting multiple error messages when the field is blank.
@@ -25,7 +25,7 @@ class Product < ApplicationRecord
             allow_blank: true,
             format: {
               with: /\.(gif|jpg|png|jpeg)\z/i,
-              message: 'must be a URL for GIF, JPG or PNG image.',
+              message: 'must be a URL for GIF, JPG or PNG image.'
             }
 
   private

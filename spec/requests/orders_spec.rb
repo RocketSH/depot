@@ -38,14 +38,14 @@ RSpec.describe 'Orders', type: :request do
         }
 
         expect do
-          post orders_path(@cart),
+          post orders_path(cart),
                params: {
                  order: {
                    name: order.name,
                    address: order.address,
                    email: order.email,
-                   pay_type: order.pay_type,
-                 },
+                   pay_type: order.pay_type
+                 }
                }
         end.to change(Order, :count).by(1)
       end
