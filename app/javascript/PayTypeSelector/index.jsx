@@ -1,5 +1,6 @@
 import React from 'react'
 
+// function PayTypeSelector() {
 function PayTypeSelector() {
   return (
     <div className="field">
@@ -9,7 +10,7 @@ function PayTypeSelector() {
         <option value="Check">Check</option>
         <option value="Credit card">Credit card</option>
         <option value="Purchase order">Purchase order</option>
-      </selcet>
+      </select>
     </div>
   );
 }
