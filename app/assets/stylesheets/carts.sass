@@ -3,7 +3,7 @@
 .carts
   margin-top: 2em
   article
-    background: white
+    background: $bg-color
     border-radius: .5em
     padding: 1.414em
     @media (min-width: 30em)
@@ -23,6 +23,23 @@
         font-weight: bold
         text-align: right
 
+    td.update-item
+      a
+        display: flex
+        text-decoration: none
+        border: 1px solid $dark-border
+        border-radius: 30px
+        padding: 0.5em 1em
+        color: black
+        align-content: center
+        align-items: center
+        &:hover
+          background-color: lighten($font-color, 70%)
+          transition: $transition
+
+        img
+          margin-right: .5rem
+
 tfoot
   td, th.price
     font-weight: bold
@@ -34,32 +51,30 @@ tfoot
   td.price
     border-top: solid thin #000
 
-input[type="submit"]
-  margin-top: 1rem
-  background-color: lighten($primary-contrast, 10%)
-  border-radius: 0.354em
-  border: solid thin $secondary
-  color: $secondary
-  font-size: 1em
-  padding: 0.5rem 1em
-  &:hover
-    background-color: $secondary
-    border: solid thin $secondary
-    color: white
-    transition: $transition
-td.update-item
-  a
-    display: flex
-    text-decoration: none
-    border: 1px solid grey
-    border-radius: 30px
-    padding: .3rem .5rem .1rem
-    color: black
-    align-content: center
-    align-items: center
+.actions
+  display: flex
+  gap: .5em
+  flex-direction: row-reverse
+
+  input[type="submit"]
+    margin-top: 1rem
+    background-color: $notice-color
+    border-radius: 0.354em
+    border: solid thin $notice-color
+    color: $bg-color
+    font-size: 1em
+    padding: 0.5rem 1em
     &:hover
-      background-color: lighten($font-color, 70%)
+      background-color: $secondary
+      border: solid thin $secondary
+      color: $bg-color
       transition: $transition
 
-    img
-      margin-right: .5rem
+  input[type="submit"].checkout
+    background-color: $primary-contrast
+    border: solid thin $dark-border
+    color: black
+    font-weight: bold
+    &:hover
+      background-color: #9d9
+

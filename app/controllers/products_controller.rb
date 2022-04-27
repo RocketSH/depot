@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[show edit update destroy]
+  before_action :set_product, only: %i[show edit update destroy who_bought]
 
   def index
     @products = Product.all.order(:title)
@@ -34,6 +34,17 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
+  end
+
+  def who_bought
+    @latest_order = @product.orders.order(:updated_at).last
+
+    if stale?(@latest_order)
+      respond_to do |format|
+        format.html { render template: 'products/who_bought' }
+        format.atom
+      end
+    end
   end
 
   private

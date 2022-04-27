@@ -59,7 +59,6 @@ RSpec.describe 'LineItems', type: :request do
   describe 'DELETE /destroy' do
     it 'destroys the requested line_item when qty == 1' do
       line_item = create(:line_item)
-      p line_item
       expect { put line_item_path(line_item) }.to change(LineItem, :count).by(
         -1,
       )
