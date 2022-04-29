@@ -5,8 +5,8 @@ import CreditCardPayType from "./CreditCardPayType";
 import CheckPayType from "./CheckPayType";
 import PurchaseOrderPayType from "./PurchaseOrderPayType";
 
-function PayTypeCustomComponent({ payType }) {
-  switch(payType) {
+function PayTypeCustomComponent({ prop }) {
+  switch(prop) {
     case "Credit card":
       return <CreditCardPayType />
     case "Check":
@@ -40,7 +40,7 @@ export default function PayTypeSelector() {
           <option value="Purchase order">Purchase order</option>
         </select>
       </div>
-      <PayTypeCustomComponent payType={payType} />
+      <PayTypeCustomComponent prop={payType} />
     </div>
   );
 }
