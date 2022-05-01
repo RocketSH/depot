@@ -3,6 +3,6 @@ section.depot_form
   = render 'form', order: @order
 
   p
-    = link_to "Edit", edit_order_path(@order)
+    = link_to "Back", order_path
   p
     = link_to "Delete Order", order_path(@order), method: "delete", data: { confirm: "Are you sure?" }

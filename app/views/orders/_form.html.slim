@@ -24,5 +24,8 @@
   #pay-type-component
 
   .actions
+  - if order.id
+    = form.submit 'Save'
+  - else
     = form.submit 'Place Order'
 
