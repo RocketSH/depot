@@ -1,7 +1,11 @@
 FactoryBot.define do
+  sequence :product_title do |n|
+    "Product #{n}"
+  end
+
   # make some random products
   factory :product do
-    title { Faker::Book.title }
+    title { generate(:product_title) }
     description { Faker::Books::Dune.quote }
     image_url { Faker::Avatar.image + '.jpg' }
     price { Faker::Number.between(from: 0.01, to: 99).round(2) }
