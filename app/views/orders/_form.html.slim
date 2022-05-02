@@ -21,10 +21,11 @@
     = form.label :email
     = form.email_field :email, size: 40
 
-  .field
-    = form.label :pay_type
-    = form.select :pay_type, Order.pay_types.keys, prompt: 'Select a payment method'
+  #pay-type-component
 
   .actions
+  - if order.id
+    = form.submit 'Save'
+  - else
     = form.submit 'Place Order'
 

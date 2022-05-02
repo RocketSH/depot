@@ -33,3 +33,4 @@ yarn-debug.log*
 .tool-versions
 
 dist
+tags
