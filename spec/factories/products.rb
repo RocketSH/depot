@@ -22,6 +22,6 @@ FactoryBot.define do
     image_url do
       'https://insidethemagic.net/wp-content/uploads/2016/12/zootopia1.jpg'
     end
-    price { rand(1..50_000) }
+    price { 50 }
   end
 end
