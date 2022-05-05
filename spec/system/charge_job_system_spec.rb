@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ChargeJob, type: :system do
   let(:product) { create_list(:product, 2) }
+  subject(:job) { click_button("Place Order") }
 
   describe "#perform_later" do
     before do
@@ -12,6 +13,7 @@ RSpec.describe ChargeJob, type: :system do
     it "submit checkout form with pay_type: check" do
       visit root_path(product)
 
+      expect(Order.count).to eq 0
       click_button 'Add to Cart', match: :first
       click_button "Checkout"
 
@@ -26,7 +28,9 @@ RSpec.describe ChargeJob, type: :system do
       fill_in "Routing #", with: "123456"
       fill_in "Account #", with: "987654"
       
-      expect { click_button("Place Order").perform_async }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
+      expect { job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
+      expect(ActiveJob::Base.new.queue_name).to eq("default")
+      expect(Order.count).to eq 1
     end
   end
 end
