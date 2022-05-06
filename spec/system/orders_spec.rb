@@ -17,6 +17,16 @@ RSpec.describe "Orders", type: :system, js: true do
     have_selector 'order_pay_type', with_options: ['Check', 'Purchase order', 'Credit card'], selected: 'Check'
     select 'Check', from: 'order_pay_type'
     expect(page).to have_field('order_routing_number')
+    fill_in "Routing #", with: "123456"
+    fill_in "Account #", with: "987654"
+    
+    click_button("Place Order")
+
+    expect(Order.count).to eq 1
+    order = Order.last
+    expect(order.name).to eq('John Watson')
+    expect(order.address).to eq('221B Baker Street')
+    expect(order.email).to eq('dr_watson@bbb.com')
   end
 
   scenario "Render pay type Credit card component" do
