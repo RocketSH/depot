@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  layout "backend", except: %i[index, who_bought]
   before_action :set_product, only: %i[show edit update destroy who_bought]
 
   def index
@@ -48,6 +49,12 @@ class ProductsController < ApplicationController
         format.atom
       end
     end
+  end
+
+  def process_upload
+    image = params[:file]
+    binary = image.read
+    
   end
 
   private
