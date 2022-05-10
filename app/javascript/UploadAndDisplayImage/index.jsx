@@ -39,16 +39,18 @@ const UploadAndDisplayImage = () => {
   return (
     <>
       <p>
-        <label htmlFor="image" className="image-upload-btn">        <input
+        <label htmlFor="product_image" className="image-upload-btn">
+          <input
           type="file"
-          id="image"
+          id="product_image"
+          name="product[image]"
           accept=".png, .jpg, .jpeg"
           size="5"
+          multiple={false}
           onChange={changeHandler}
         />
-          Add Image
+          Select your image
         </label>
-
       </p>
       { imgDataURL ?
         <p className="image-upload-wrap">

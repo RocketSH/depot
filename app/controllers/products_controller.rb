@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
+
       redirect_to product_url(@product),
                   notice: 'Product was successfully updated.'
 
@@ -51,12 +52,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def process_upload
-    image = params[:file]
-    binary = image.read
-    
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -66,6 +61,6 @@ class ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:title, :description, :image_url, :price)
+    params.require(:product).permit(:title, :description, :image_url, :price, :image)
   end
 end
