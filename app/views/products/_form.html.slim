@@ -17,12 +17,11 @@
   .field
     = form.label :image_url
     = form.text_field :image_url, placeholder: "please paste your image url"
-  
+  #image-upload
+    = javascript_pack_tag("image_upload") 
   .field
     = form.label :price
     = form.text_field :price
   .actions
     = form.submit
 
-#image-upload
-  = javascript_pack_tag("image_upload") 

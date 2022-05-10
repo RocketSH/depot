@@ -1,57 +1,61 @@
 import React, { useState, useEffect } from "react";
 
 const UploadAndDisplayImage = () => {
-  const [file, setFile] = useState(null);
-  const [fileDataURL, setFileDataURL] = useState(null);
+  const [image, setImage] = useState(null);
+  const [imgDataURL, setImgDataURL] = useState(null);
 
-  const resetHandler = () => {
+  const resetHandler = (e) => {
+    const image = e.target = null;
+    setImgDataURL(null);
   }
   const changeHandler = (e) => {
-    const file = e.target.files[0];
-    setFile(file);
-    console.log(file);
+    const image = e.target.files[0];
+    if (image) {
+      setImage(image);
+    } else
+    return;
   }
   useEffect(() => {
-    let fileReader, isCancel = false;
-    if (file) {
-      fileReader = new FileReader();
-      fileReader.onload = (e) => {
+    let reader, isCancel = false;
+    if (image) {
+      reader = new FileReader();
+      reader.onload = (e) => {
         const { result } = e.target;
         if (result && !isCancel) {
-          setFileDataURL(result);
+          setImgDataURL(result);
         }
       }
-      fileReader.readAsDataURL(file);
+      reader.readAsDataURL(image);
     }
     return () => {
       isCancel = true;
-      if (fileReader && fileReader.readyState === 1) {
-        fileReader.abort();
+      if (reader && reader.readyState === 1) {
+        reader.abort();
       }
     }
-  }, [file])
+  }, [image])
 
 
   return (
     <>
-      <form>
-        <p>
-          <label htmlFor="image"></label>
-          <input
-            type="file"
-            id="image"
-            accept=".png, .jpg, .jpeg"
-            size="5"
-            onChange={changeHandler}
-          />
-        </p>
-      </form>
-      { fileDataURL ?
+      <p>
+        <label htmlFor="image" className="image-upload-btn">        <input
+          type="file"
+          id="image"
+          accept=".png, .jpg, .jpeg"
+          size="5"
+          onChange={changeHandler}
+        />
+          Add Image
+        </label>
+
+      </p>
+      { imgDataURL ?
         <p className="image-upload-wrap">
           {
-            <img className="preview-image" src={fileDataURL} alt="preview" />
+            <img className="preview-image" src={imgDataURL} alt="preview" />
           }         
-          <button className="remove-image" onClick={resetHandler}>Reset</button>
+          <button className="remove-image" onClick={resetHandler}>X</button>
         </p> :
       null }
     </>
