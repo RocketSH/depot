@@ -20,8 +20,5 @@ table
         = number_to_currency(item.price, locale: :pl)
     tr
       td
-        - if item.product.image_url.present?
-          = image_tag(item.product.image_url)
-        - else 
-          = image_tag(item.product.image)
+        = render_if_image_url(item.product)
 
