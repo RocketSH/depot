@@ -5,7 +5,7 @@ p
 p
   strong
     | Description:
-  = @product.description
+  = strip_tags(@product.description)
 p
   strong
     | Price:

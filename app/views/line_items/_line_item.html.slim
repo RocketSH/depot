@@ -1,8 +1,16 @@
 tr class="#{ line_item == @current_item ? 'line-item-highlight' : ''}"
-  td.quantity = line_item.quantity 
+  td
+    - if line_item.product.image_url.present?
+     = image_tag(line_item.product.image_url)
+    - else
+     = image_tag(line_item.product.image.variant(resize_to_limit: [100, 100]))
   td = line_item.product.title
-  td.price = number_to_currency(line_item.subtotal, locale: :pl)
+  td.quantity
+    = line_item.quantity 
+    |  x
+  td.price
+    = number_to_currency(line_item.subtotal, locale: :pl)
   td.update-item
     = link_to line_item_path(line_item), method: :put
-      = image_tag("remove-item.svg", size: '20')
-      span Qty -1
+      = image_tag("remove-item.svg", size: '15')
+      span -1

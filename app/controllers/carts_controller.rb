@@ -4,7 +4,7 @@ class CartsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invaild_cart
 
   def show
-    @cart = Cart.find(session[:cart_id])
+    @cart = Cart.includes(line_items: :product).find(session[:cart_id])
   end
 
   def destroy

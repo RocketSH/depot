@@ -6,8 +6,7 @@ h1 Products
 table
   tbody
     - @products.each do |product|
-      / cycle is a TextHelper 
-      tr class=cycle('list_line_odd', 'list_line_even')
+      tr class=cycle('list_line_odd', 'list_line_even') 
         td.image
           - if product.image_url.present?
             = image_tag(product.image_url, class: 'list_image')
@@ -17,7 +16,6 @@ table
           h1
             = product.title
           p
-            / truncate is a String method, and strip_tags also a TextHelper 
             = truncate(strip_tags(product.description), length: 80)
         td
           = product.price
