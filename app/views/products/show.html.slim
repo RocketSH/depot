@@ -10,10 +10,8 @@ p
   strong
     | Price:
   = number_to_currency(@product.price, locale: :pl)
-- if @product.image_url.present?
-  = image_tag(@product.image_url)
-- else 
-  = image_tag(@product.image)
+
+= render_if_display(@product)
 
 = link_to 'Edit', edit_product_path(@product)
 = link_to 'Back', products_path

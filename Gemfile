@@ -25,7 +25,6 @@ gem 'sidekiq', "~> 6.4"
 
 gem 'i18n', '~> 1.10'
 gem 'slim-rails'
-gem 'rmagick'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'

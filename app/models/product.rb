@@ -30,6 +30,18 @@ class Product < ApplicationRecord
               message: 'must be a URL for JPG or PNG image.'
             }
 
+  def thumbnail
+    image.variant(resize_to_limit: [60, 60]).processed
+  end
+
+  def profile
+    image.variant(resize_to_limit: [180, 180]).processed
+  end
+  
+  def display
+    image.variant(resize_to_limit: [350, 350]).processed
+  end
+
   private
 
   def ensure_not_referenced_by_any_line_item

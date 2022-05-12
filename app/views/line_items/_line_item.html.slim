@@ -1,5 +1,5 @@
 tr class="#{ line_item == @current_item ? 'line-item-highlight' : ''}"
-  td = render_if_image_url(line_item.product)
+  td = render_if_thumbnail(line_item.product)
   td = line_item.product.title
   td.quantity
     = line_item.quantity 

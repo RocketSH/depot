@@ -8,7 +8,7 @@ table
     - @products.each do |product|
       tr class=cycle('list_line_odd', 'list_line_even') 
         td.image
-          = render_if_image_url(product)
+          = render_if_profile(product)
         td.description
           h1
             = product.title
