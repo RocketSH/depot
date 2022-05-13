@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title Świat Zabawek
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = favicon_pack_tag 'android-chrome-192x192.png', type: 'image/png'
+  body
+    main.authentication
+      header
+        = link_to image_tag('logo.svg', alt: 'The Pragmatic Bookshelf'), '/'
+      section = yield
