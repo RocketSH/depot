@@ -1,5 +1,5 @@
 class OrderMailer < ApplicationMailer
-  default from: 'Rubist World <depot@rubist.com>'
+  default from: 'Rubist World <1119han@gmail.com>'
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
