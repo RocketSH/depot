@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ChargeJob, type: :system do
+RSpec.describe ChargeOrderJob, type: :system do
   let(:product) { create_list(:product, 2) }
   subject(:job) { click_button("Place Order") }
 
@@ -28,6 +28,7 @@ RSpec.describe ChargeJob, type: :system do
       fill_in "Routing #", with: "123456"
       fill_in "Account #", with: "987654"
       
+      # expect(job).to be_delayed
       expect { job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
       expect(ActiveJob::Base.new.queue_name).to eq("default")
       expect(Order.count).to eq 1

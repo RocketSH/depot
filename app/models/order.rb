@@ -15,11 +15,11 @@ class Order < ApplicationRecord
     end
   end
 
-  def charge!(pay_type_params)
+  def charge!(pay_type, pay_type_params)
     payment_details = {}
     payment_method = nil
 
-    case order_params[:pay_type]
+    case pay_type
     when "Check"
       payment_method = :check
       payment_details[:routing] = pay_type_params[:routing_number]

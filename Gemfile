@@ -42,6 +42,7 @@ group :development, :test do
   gem 'pry', '~> 0.13.1'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
+  gem 'rspec-sidekiq'
   gem 'rubocop', '~> 1.26', require: false
   gem 'slim_lint', '~> 0.22.1'
 end

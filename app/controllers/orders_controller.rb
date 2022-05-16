@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
     if @order.save
       Cart.destroy(session[:cart_id])
       session[:cart_id] = nil
-      ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
+      ChargeOrderJob.perform_later(@order.id, order_params[:pay_type], pay_type_params)
       redirect_to root_url, notice: 'Thank you for your order.'
     else
       render :new
