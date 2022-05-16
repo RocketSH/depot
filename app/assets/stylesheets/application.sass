@@ -33,16 +33,22 @@ header.main
     p
       color: white
       font-weight: bold
-  .nav-links a
-    margin-left: .5rem
-    color: black
-    text-decoration: none
-    &:hover
-      text-shadow: $text-shadow
-      transition: $transition
-    &:nth-child(1)
-      border-right: 1px solid black
-      padding-right: .5rem
+  .nav-links
+    height: 4.56rem
+    a
+      margin-left: .5rem
+      text-decoration: none
+      color: black
+      &:hover
+        text-shadow: $text-shadow
+        transition: $transition
+      &:nth-child(1)
+        border-right: 1px solid black
+        padding-right: .5rem
+
+.login
+  a
+    line-height: 4.56rem
 
 .content
   margin: 0

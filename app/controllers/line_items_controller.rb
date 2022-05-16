@@ -1,4 +1,7 @@
 class LineItemsController < ApplicationController
+  before_action :only => [:create] do
+    redirect_to new_user_session_path, notice: 'Please login before adding products to your cart.' unless current_user
+  end
   include CurrentCart
   before_action :set_cart, only: %i[create destroy]
   before_action :set_line_item, only: %i[update destroy]
