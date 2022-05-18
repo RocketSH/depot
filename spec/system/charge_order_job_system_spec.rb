@@ -1,37 +1,63 @@
 require 'rails_helper'
 
 RSpec.describe ChargeOrderJob, type: :system do
-  let(:product) { create_list(:product, 2) }
-  subject(:job) { click_button("Place Order") }
+  let(:cart) { create(:cart) }
+  let(:product) { create(:zootopia) }
+  let(:order) { Order.create(id: 20, name: 'John Watson', address: '221B Baker Street', email: 'dr_watson@bbb.com', pay_type: 'Purchase order' ) }
+  subject(:charge_order_job) { ChargeOrderJob.perform_later(20, "Purchase order", {"po_number"=>"123456"}) }
 
   describe "#perform_later" do
     before do
-      driven_by(:selenium_chrome_headless)
+      driven_by(:rack_test)
+      # driven_by(:selenium_chrome_headless)
       ActiveJob::Base.queue_adapter = :test
     end
 
-    it "submit checkout form with pay_type: check" do
+    it "test" do
+      expect(ActiveJob::Base.queue_adapter.enqueued_jobs.count).to eq 0
+      post orders_path(cart), params: {
+        order: {
+          name: order.name,
+          address: order.address,
+          email: order.email,
+          pay_type: order.pay_type
+        }
+      }
+      charge_order_job
+      # expect{ charge_order_job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
+      expect(ActiveJob::Base.new.queue_name).to eq("default")
+      expect{ charge_order_job }.to have_enqueued_job
+      # expect(charge_order_job).to have_been_performed.with()
+    end
+
+    it "processing charge job" do
+
       visit root_path(product)
 
       expect(Order.count).to eq 0
+      expect(ActiveJob::Base.queue_adapter.enqueued_jobs.count).to eq 0
       click_button 'Add to Cart', match: :first
       click_button "Checkout"
 
       fill_in 'order_name', with: 'John Watson'
       fill_in 'order_address', with: '221B Baker Street'
       fill_in 'order_email', with: 'dr_watson@bbb.com'
-      expect(page).to have_no_field('order_routing_number')
 
-      have_selector 'order_pay_type', with_options: ['Check', 'Purchase order', 'Credit card'], selected: 'Check'
-      select 'Check', from: 'order_pay_type'
-      expect(page).to have_field('order_routing_number')
-      fill_in "Routing #", with: "123456"
-      fill_in "Account #", with: "987654"
+      have_selector 'order_pay_type', with_options: ['Check', 'Purchase order', 'Credit card']
+      select 'Purchase order', from: 'order_pay_type'
+      fill_in 'order_po_number', with: '123456'
+
+      click_button ''
+       
+      # expect { job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
+      # expect(ActiveJob::Base.new.queue_name).to eq("default")
+      # expect(Order.count).to eq 1
+      click_button("Place Order") 
+      order = Order.last
+      expect(charge_order_job).to have_enqueued_job
+      expect(charge_order_job).to have_been_performed.with()
       
-      # expect(job).to be_delayed
-      expect { job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
-      expect(ActiveJob::Base.new.queue_name).to eq("default")
-      expect(Order.count).to eq 1
+
     end
   end
 end
