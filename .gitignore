@@ -35,4 +35,3 @@ yarn-debug.log*
 dist
 tags
 dump.rdb
-sendgrid.env

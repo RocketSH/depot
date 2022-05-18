@@ -15,7 +15,7 @@ class Order < ApplicationRecord
     end
   end
 
-  def charge!(pay_type, pay_type_params)
+  def charge!(pay_type, pay_type_params, order_id)
     payment_details = {}
     payment_method = nil
 
@@ -42,7 +42,8 @@ class Order < ApplicationRecord
     )
 
     if payment_result.succeeded?
-      OrderMailer.send_received_email(@order).deliver_later
+      @order = Order.find_by(id: order_id)
+      OrderMailer.received(@order).deliver_now
     else
       raise payment_result.error
     end

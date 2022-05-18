@@ -1,22 +1,22 @@
 class OrderMailer < ApplicationMailer
-  default from: 'Rubist World <1119han@gmail.com>'
+  require 'sendgrid-ruby'
+  include SendGrid
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.order_mailer.received.subject
-  #
   def received(order)
     @order = order
 
-    mail to: order.email, subject: 'Świat Zabawek Store Order Confirmation'
+    mail(from: 'Świat Zabawek <shu-han@llinformatics.com>' ,to: 'shu.h.hu@protonmail.com', subject: 'Świat Zabawek Store Order Confirmation')
+
+    sg = SendGrid::API.new(api_key: Rails.application.credentials.sendgrid[:api_key])
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
+    puts "=======status code========"
+    puts response.status_code
+    puts "=======headers========"
+    puts response.headers
+    puts "=======body========"
+    puts response.body
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.order_mailer.shipped.subject
-  #
   def shipped(order)
     @order = order
 
