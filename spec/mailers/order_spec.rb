@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe OrderMailer, type: :mailer do
-  let(:order) { create(:order) }
+  let(:order) { create(:order, :credit_card) }
 
   describe "received" do
     let(:mail) { OrderMailer.received(order).deliver_now }

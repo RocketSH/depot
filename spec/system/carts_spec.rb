@@ -4,7 +4,7 @@ RSpec.describe "LineItems/ create", type: :system do
   let(:product) { create(:zootopia) }
   let(:cart) { create(:cart) }
 
-  scenario "add highlight css class" do
+  scenario "add a cart" do
     visit root_path(product)
 
     expect(page).to have_no_css('.carts')

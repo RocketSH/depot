@@ -19,11 +19,7 @@ class LineItemsController < ApplicationController
   end
 
   def update
-    if @line_item.minus_line_item_qty
-      redirect_to '/'
-    else
-      redirect_to '/'
-    end
+    @line_item.minus_line_item_qty
   end
 
   def destroy

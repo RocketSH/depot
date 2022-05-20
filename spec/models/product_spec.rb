@@ -19,19 +19,12 @@ RSpec.describe Product, type: :model do
       expect(product).to_not be_valid
     end
 
-    it 'is not valid without a image url' do
-      product.image_url = nil
-      expect(product).to_not be_valid
-    end
-
     it 'is valid with correc image url suffix' do
       ok = %w[
-        fred.gif
         fred.jpg
         fred.png
         FRED.JPG
         FRED.Jpg
-        http://a.b.c/x/y/z/fred.gif
       ]
 
       ok.each do |image_url|
