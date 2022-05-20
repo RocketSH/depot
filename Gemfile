@@ -43,7 +43,6 @@ group :development, :test do
   gem 'pry', '~> 0.13.1'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
-  gem 'rspec-sidekiq'
   gem 'rubocop', '~> 1.26', require: false
   gem 'slim_lint', '~> 0.22.1'
 end
@@ -61,6 +60,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'rspec-sidekiq'
   gem 'selenium-webdriver'
 
   # Easy installation and use of web drivers to run system tests with browsers

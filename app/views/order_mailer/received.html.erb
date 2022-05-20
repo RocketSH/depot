@@ -4,15 +4,35 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Dear <%= @order.name %></h1>
+    <h3>Dear <%= @order.name %></h3>
     <p>Thank you for your recent order from The Swiat Zabawek Store.</p>
     <hr>
     <h3>You ordered the following items:</h3>
-    <ol>
+    <table>
+      <tbody>
+      </tbody>
       <% @order.line_items.each do |item| %>
-        <li><%= item %></li>
+        <tr>
+          <td>
+            Product Title:
+            <%= item.product.title %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Order Qty:
+            <%= item.quantity %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Subtotal:
+            <%= number_to_currency(item.subtotal, locale: :pl) %>
+          </td>
+        </tr>
       <% end %>
-    </ol>
+    </table>
+    <hr>
     <p>We'll send you a separate email when your order ships.</p>
   </body>
 </html>

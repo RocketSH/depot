@@ -5,7 +5,7 @@ class OrderMailer < ApplicationMailer
   def received(order)
     @order = order
 
-    mail(from: 'Świat Zabawek <shu-han@llinformatics.com>' ,to: 'shu.h.hu@protonmail.com', subject: 'Świat Zabawek Store Order Confirmation')
+    mail(from: 'Świat Zabawek <shu-han@llinformatics.com>' ,to: @order.email, subject: 'Świat Zabawek Store Order Confirmation')
 
     sg = SendGrid::API.new(api_key: Rails.application.credentials.sendgrid[:api_key])
     response = sg.client.mail._('send').post(request_body: mail.to_json)
