@@ -1,9 +1,9 @@
 class Product < ApplicationRecord
+  include ImageUploader::Attachment(:image)
+  before_save :image_resize
   has_many :line_items
   has_many :orders, through: :line_items
   before_destroy :ensure_not_referenced_by_any_line_item
-
-  has_one_attached :image
 
   validates :title, :description, :price, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
@@ -22,31 +22,15 @@ class Product < ApplicationRecord
                 'must begin with first letter Uppercase or Digital number'
             }
 
-  # use the allow_blank option to avoid getting multiple error messages when the field is blank.
-  validates :image_url,
-            allow_blank: true,
-            format: {
-              with: /\.(jpg|png|jpeg)\z/i,
-              message: 'must be a URL for JPG or PNG image.'
-            }
-
-  def thumbnail
-    image.variant(resize_to_limit: [60, 60]).processed
-  end
-
-  def profile
-    image.variant(resize_to_limit: [180, 180]).processed
-  end
-  
-  def display
-    image.variant(resize_to_limit: [350, 350]).processed
-  end
-
   private
 
   def ensure_not_referenced_by_any_line_item
     return if line_items.empty?
     errors.add(:base, 'Line Items present')
     throw :abort
+  end
+
+  def image_resize
+    self.image_derivatives!
   end
 end

@@ -5,7 +5,7 @@ const UploadAndDisplayImage = () => {
   const [imgDataURL, setImgDataURL] = useState(null);
 
   const resetHandler = (e) => {
-    const image = e.target = null;
+    e.target = null;
     setImgDataURL(null);
   }
   const changeHandler = (e) => {
