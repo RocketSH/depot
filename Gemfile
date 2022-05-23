@@ -24,8 +24,8 @@ gem 'sidekiq', "~> 6.4"
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'i18n', '~> 1.10'
-gem 'slim-rails'
 gem 'sendgrid-ruby'
+gem 'slim-rails'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'

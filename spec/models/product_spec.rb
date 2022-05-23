@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  let(:product) { create(:product) }
-  let(:zootopia) { create(:zootopia) }
+  let(:product) { create(:product, :image) }
 
   context 'create& save product validation' do
     it 'is valid with valid attributes' do
@@ -33,15 +32,6 @@ RSpec.describe Product, type: :model do
       end
     end
 
-    it 'is invalid with incorrec image url suffix' do
-      bad = %w[fred.doc fred.gif/more fred.gif.more]
-
-      bad.each do |image_url|
-        product.image_url = image_url
-        expect(product).to_not be_valid
-      end
-    end
-
     it 'is not valid without a price' do
       product.price = nil
       expect(product).to_not be_valid
@@ -50,15 +40,6 @@ RSpec.describe Product, type: :model do
     it 'is not valid when price less than 0' do
       product.price = rand(0..-100_000)
       expect(product).to_not be_valid
-    end
-  end
-
-  context 'destroy product' do
-    it 'fail if line item referencing' do
-      line_item = create(:line_item)
-      product = Product.find(line_item.product_id)
-
-      expect(product.destroy).to eq(false)
     end
 
     it 'destroy successfully' do
