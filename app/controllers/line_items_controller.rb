@@ -21,19 +21,27 @@ class LineItemsController < ApplicationController
     end
   end
 
-  def update
-    if @line_item.minus_line_item_qty
-      redirect_to '/', notice: 'Product was successfully revised quantity.'
-    else
-      redirect_to '/', notice: 'Sorry, this product quantity can not be revised.'
+  def add_quantity
+    @line_item = LineItem.find(params[:id])
+    @line_item.quantity += 1
+    @line_item.save
+    redirect_to '/'
+  end
+  
+  def reduce_quantity
+    @line_item = LineItem.find(params[:id])
+    if @line_item.quantity > 1
+      @line_item.quantity -= 1
     end
+    @line_item.save
+    redirect_to '/'
   end
 
   def destroy
     @line_item.destroy
     session[:line_item_id] = nil
 
-    redirect_to @cart, notice: 'Product was successfully removed from your shopping cart.'
+    redirect_to '/', notice: 'Product was successfully removed from your shopping cart.'
   end
 
   private

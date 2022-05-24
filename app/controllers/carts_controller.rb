@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: %i[edit update destroy]
+  before_action :set_cart, only: %i[destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invaild_cart
 
   def show

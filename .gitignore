@@ -34,3 +34,5 @@ yarn-debug.log*
 
 dist
 tags
+dump.rdb
+public/uploads
