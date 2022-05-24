@@ -3,6 +3,10 @@ class OrdersController < ApplicationController
   before_action :ensure_cart_isnt_empty, only: :new
   before_action :set_order, only: %i[show edit update destroy]
 
+  def index
+    @orders = current_user.orders
+  end
+
   def new
     @order = Order.new
   end
@@ -15,7 +19,7 @@ class OrdersController < ApplicationController
       Cart.destroy(session[:cart_id])
       session[:cart_id] = nil
       ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
-      redirect_to root_url, notice: 'Thank you for your order.'
+      redirect_to '/', notice: 'Thank you for your order.'
     else
       render :new
     end
