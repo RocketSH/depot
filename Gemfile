@@ -40,6 +40,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
+  gem "letter_opener" #preview email
   gem 'prettier'
   gem 'pry', '~> 0.13.1'
   gem 'rails-controller-testing'

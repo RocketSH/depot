@@ -10,17 +10,9 @@ class Product < ApplicationRecord
 
   # default case sensitive doesn't work
   validates :title,
-            uniqueness: {
-              case_sensitive: true
-            },
-            length: {
-              minimum: 3
-            },
-            format: {
-              with: /\A([A-Z]|\d)/,
-              message:
-                'must begin with first letter Uppercase or Digital number'
-            }
+            uniqueness: { case_sensitive: true },
+            length: { minimum: 3 },
+            format: { with: /\A([A-Z]|\d)/, message: 'must begin with first letter Uppercase or Digital number' }
 
   private
 
