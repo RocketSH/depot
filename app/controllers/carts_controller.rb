@@ -1,10 +1,11 @@
 class CartsController < ApplicationController
   include CurrentCart
+  include RescueInvalidCart
   before_action :set_cart, only: %i[edit update destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invaild_cart
 
   def show
-    @cart = Cart.find(session[:cart_id])
+    @cart = Cart.includes(line_items: :product).find(session[:cart_id])
   end
 
   def destroy
@@ -20,10 +21,4 @@ class CartsController < ApplicationController
     end
   end
 
-  private
-
-  def invaild_cart
-    logger.error "Attempt to access invalid cart #{params[:id]}"
-    redirect_to root_url, notice: 'Sorry, you are querying an invalid cart'
-  end
 end

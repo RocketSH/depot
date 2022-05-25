@@ -1,7 +1,11 @@
 class OrdersController < ApplicationController
   before_action :set_cart, only: %i[new create]
   before_action :ensure_cart_isnt_empty, only: :new
-  before_action :set_order, only: %i[show edit update destroy]
+  before_action :set_order, only: %i[edit update destroy]
+
+  def show
+    @products = Order.includes(line_items: :product).find(params[:id])
+  end
 
   def new
     @order = Order.new
@@ -14,7 +18,7 @@ class OrdersController < ApplicationController
     if @order.save
       Cart.destroy(session[:cart_id])
       session[:cart_id] = nil
-      ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
+      ChargeOrderJob.perform_later(@order.id, order_params[:pay_type], pay_type_params)
       redirect_to root_url, notice: 'Thank you for your order.'
     else
       render :new

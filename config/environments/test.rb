@@ -35,6 +35,12 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # This line let us able to use ActionMailer::Base.deliveries.count
+  config.action_mailer.delivery_method = :test
+
+  # This line let us to use expect(...).to have_enqueued_job.on_queue('mailers') 
+  config.active_job.queue_adapter = :test
+
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.

@@ -19,11 +19,7 @@ class LineItemsController < ApplicationController
   end
 
   def update
-    if @line_item.minus_line_item_qty
-      redirect_to '/', notice: 'Product was successfully revised quantity.'
-    else
-      redirect_to '/', notice: 'Sorry, this product quantity can not be revised.'
-    end
+    @line_item.minus_line_item_qty
   end
 
   def destroy

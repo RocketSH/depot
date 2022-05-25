@@ -1,2 +1,38 @@
-h1 Order#received
-p = "#{@greeting}, find me in app/views/order_mailer/received.html.erb"  
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Dear <%= @order.name %></h3>
+    <p>Thank you for your recent order from The Swiat Zabawek Store.</p>
+    <hr>
+    <h3>You ordered the following items:</h3>
+    <table>
+      <tbody>
+      </tbody>
+      <% @order.line_items.each do |item| %>
+        <tr>
+          <td>
+            Product Title:
+            <%= item.product.title %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Order Qty:
+            <%= item.quantity %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Subtotal:
+            <%= number_to_currency(item.subtotal, locale: :pl) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <hr>
+    <p>We'll send you a separate email when your order ships.</p>
+  </body>
+</html>

@@ -4,18 +4,17 @@ article
       = notice
 
   h2
-    | Your Current Cart ID:
-    = cart.id
+    | Shopping Cart:
 
   table
     = render(cart.line_items)
     tfoot 
       tr 
-        th[colspan="2"]
+        th[colspan="4"]
           | Total amount:
         td.price = number_to_currency(cart.amount, locale: :pl)
 
-  .actions
+  .cart-actions
     = button_to "Empty cart", cart, method: :delete, remote: true, data: { confirm: 'Are you sure?' }
     - unless current_page?(controller: 'orders', action:'new')
       = button_to "Checkout", new_order_path, method: :get, class: "checkout"
