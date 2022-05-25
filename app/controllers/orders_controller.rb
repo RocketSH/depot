@@ -50,8 +50,8 @@ class OrdersController < ApplicationController
   private
 
   def set_cart
-    if session[:cart_id]
-      @cart = Cart.find(session[:cart_id])
+    if current_user.cart
+      @cart = Cart.find_by(user_id: current_user.id)
     else
       redirect_to root_url, notice: 'Your cart is empty.'
     end

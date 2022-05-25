@@ -1,5 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart
+  skip_before_action :authenticate_user!, only: [:create]
   before_action :only => [:create] do
     redirect_to new_user_session_path, notice: 'Please login before adding products to your cart.' unless current_user
   end
