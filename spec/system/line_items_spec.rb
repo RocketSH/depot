@@ -4,10 +4,14 @@ RSpec.describe "LineItems/ create", type: :system do
   let(:products) { create_list(:product, 2) }
   let(:user) { create(:user)}
 
+  before do
+    driven_by(:selenium_chrome_headless)
+  end
+
   scenario "add highlight css class" do
     visit root_path(products)
 
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     within '.catalog' do
       click_button 'Add to Cart', match: :first
     end

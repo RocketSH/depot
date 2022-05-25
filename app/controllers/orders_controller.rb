@@ -16,12 +16,11 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(order_params.merge(user_id: current_user.id))
     @order.add_line_items_from_cart(@cart)
 
     if @order.save
-      Cart.destroy(session[:cart_id])
-      session[:cart_id] = nil
+      Cart.destroy(@cart.id)
       ChargeOrderJob.perform_later(@order.id, order_params[:pay_type], pay_type_params)
       redirect_to root_url, notice: 'Thank you for your order.'
     else

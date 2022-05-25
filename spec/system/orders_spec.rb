@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "Orders", type: :system, js: true do
+  user = FactoryBot.create(:user)
   let(:product) { create_list(:product, 2) }
 
   scenario "Check routing number" do
     visit root_path(product)
 
+    login_as(user, scope: :user)
     click_button 'Add to Cart', match: :first
     click_button "Checkout"
 
@@ -32,6 +34,7 @@ RSpec.describe "Orders", type: :system, js: true do
   scenario "Render pay type Credit card component" do
     visit root_path(product)
 
+    login_as(user, scope: :user)
     click_button 'Add to Cart', match: :first
     click_button "Checkout"
 
@@ -47,6 +50,7 @@ RSpec.describe "Orders", type: :system, js: true do
   scenario "Render pay type Purchase order component" do
     visit root_path(product)
 
+    login_as(user, scope: :user)
     click_button 'Add to Cart', match: :first
     click_button "Checkout"
 

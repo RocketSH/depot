@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-  layout "backend", except: %i[index who_bought]
   before_action :set_product, only: %i[show edit update destroy who_bought]
 
   def index
