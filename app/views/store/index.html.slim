@@ -2,12 +2,10 @@ header
   h1 Pragmatic Catalog
   p = session_counter_greater_than_five(session[:counter])
 ul.catalog
-  - cache @products do
-    - @products.each do |product|
-      - cache product do
-        li
-          / = image_tag(product.image_url)
-          h2 = product.title
-          p = sanitize(product.description)
-          .price = number_to_currency(product.price, locale: :pl)
-          = button_to "Add to Cart", line_items_path(product_id: product), remote: true
+  - @products.each do |product|
+    li
+      td = render_if_profile(product)
+      h2 = product.title
+      p = sanitize(product.description)
+      .price = number_to_currency(product.price, locale: :pl)
+      = button_to "Add to Cart", line_items_path(product_id: product), remote: true

@@ -25,6 +25,7 @@
 
 /public/packs
 /public/packs-test
+public/uploads
 /node_modules
 /yarn-error.log
 yarn-debug.log*
@@ -35,4 +36,3 @@ yarn-debug.log*
 dist
 tags
 dump.rdb
-public/uploads

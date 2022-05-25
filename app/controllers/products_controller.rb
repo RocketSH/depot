@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  layout "backend", except: %i[index who_bought]
   before_action :set_product, only: %i[show edit update destroy who_bought]
 
   def index
@@ -9,34 +10,31 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
-  def show
-  end
-
   def create
     @product = Product.new(product_params)
 
     if @product.save
-      redirect_to product_url(@product),
-                  notice: 'Product was successfully created.'
+      redirect_to product_url(@product), notice: 'Product was successfully created.'
     else
-      render json: @product.errors, status: :unprocessable_entity
+      render 'new', notice: @product.errors.to_s
     end
   end
 
   def update
     if @product.update(product_params)
-      redirect_to product_url(@product),
-                  notice: 'Product was successfully updated.'
+
+      redirect_to product_url(@product), notice: 'Product was successfully updated.'
 
       @products = Product.all.order(:title)
       ActionCable.server.broadcast 'products', html: render_to_string('store/index', layout: false)
     else
-      render @product.errors, status: :unprocessable_entity
+      render 'edit', notice: @product.errors.to_s
     end
   end
 
   def destroy
     @product.destroy
+    redirect_to @product, notice: 'Product was successfully deleted.'
   end
 
   def who_bought
@@ -59,6 +57,6 @@ class ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:title, :description, :image_url, :price)
+    params.require(:product).permit(:title, :description, :price, :image)
   end
 end

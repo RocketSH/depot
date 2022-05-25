@@ -2,5 +2,8 @@
 
 set -e
 
-tmux split-window -vh 'cd shu-han-training; bin/webpack-dev-server'
-bin/rails server
+tmux split-window -bf 'redis-server'
+tmux split-window -bf 'bin/webpack-dev-server'
+tmux split-window -fh 'bin/rails server'
+bundle exec sidekiq
+

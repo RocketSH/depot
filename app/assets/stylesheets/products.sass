@@ -1,36 +1,56 @@
+@import variables
 .products
-  margin: 0
-  padding: .5em
-  a
-    padding: .354em .5em
-    border-radius: .354em
+	margin: 0
+	padding: .5em
 
-  table
-    border-collapse: collapse
-  td
-    margin: 0
-    padding: .5em
-    &.image
-      display: none
-      @media( min-width: 30em  )
-        display: block
-        img
-          height: 11.3em
+	a
+		padding: .354em .5em
+		border-radius: .354em
 
-    &.description
-      h1
-        font-size: 1.4em
+	table
+		border-collapse: collapse
+	td
+		margin: 0
+		padding: .5em
+		&.image
+			display: none
+			@media( min-width: 30em	)
+				display: block
+				img
+					height: 11.3em
 
-    &.actions
-      ul
-        padding: 0
-        list-style: none
-        li
-          pad: .5em
+		&.description
+			h1
+				font-size: 1.4em
 
-  tr.list_line_odd
-    background-color: #effeef
+		&.actions
+			ul
+				padding: 0
+				list-style: none
+				li
+					padding: .5em
 
-  tfoot
-    td
-      padding: .5em 0
+	tr.list_line_odd
+		background-color: #effeef
+
+	tfoot
+		td
+			padding: .5em 0
+
+.products
+	form
+		.field
+			margin: .5rem auto
+		label
+			line-height: 2rem
+			font-weight: bolder
+		input[type=text], textarea
+			width: 100%
+			padding: .75rem
+			border: 1px solid $border-color
+			border-radius: .25rem
+			box-sizing: border-box
+			resize: vertical
+
+strong
+	margin-right: .5rem

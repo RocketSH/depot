@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Orders', type: :request do
   let(:cart) { create(:cart) }
   let(:empty_cart) { FactoryBot.build(:cart) }
-  let(:order) { build(:order) }
+  let(:order) { build(:order, :purchase_order) }
 
   describe 'GET /new' do
     context 'with not empty cart' do
@@ -44,7 +44,7 @@ RSpec.describe 'Orders', type: :request do
                    name: order.name,
                    address: order.address,
                    email: order.email,
-                   pay_type: order.pay_type
+                   pay_type: order.pay_type,
                  }
                }
         end.to change(Order, :count).by(1)

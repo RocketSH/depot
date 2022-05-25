@@ -1,5 +1,7 @@
 class StoreController < ApplicationController
+  include RescueInvalidCart
   before_action :increment_counter
+  rescue_from ActiveRecord::RecordNotFound, with: :invaild_cart
 
   def index
     @products = Product.order(:title)

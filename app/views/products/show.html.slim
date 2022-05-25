@@ -5,15 +5,13 @@ p
 p
   strong
     | Description:
-  = @product.description
-p
-  strong
-    | Image url:
-  / = @product.image_url
+  = strip_tags(@product.description)
 p
   strong
     | Price:
-  = @product.price
+  = number_to_currency(@product.price, locale: :pl)
+
+= render_if_display(@product)
 
 = link_to 'Edit', edit_product_path(@product)
 = link_to 'Back', products_path

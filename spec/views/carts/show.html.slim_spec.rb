@@ -17,12 +17,12 @@ RSpec.describe 'carts/show.html.slim', type: :view do
     total_amount = subject.first[:price] + subject.last[:price]
 
     expect(render).to have_selector('h2')
-    expect(render).to match(/Your Current Cart ID:#{cart_id}/)
+    expect(render).to match(/Shopping Cart/)
     expect(render).to match(/#{item_id_first}/)
     expect(render).to match(/#{item_id_second}/)
     expect(render).to match(/#{item_qty_first}/)
     expect(render).to match(/#{item_qty_second}/)
     expect(render).to have_selector('table')
-    expect(render).to match(/#{total_amount}/)
+    expect(render).to match(/#{number_to_currency(total_amount, locale: :pl)}/)
   end
 end

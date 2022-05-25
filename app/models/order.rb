@@ -16,18 +16,18 @@ class Order < ApplicationRecord
     end
   end
 
-  def charge!(pay_type_params)
+  def charge!(pay_type, pay_type_params, order_id)
     payment_details = {}
     payment_method = nil
 
-    case order_params[:pay_type]
+    case pay_type
     when "Check"
       payment_method = :check
       payment_details[:routing] = pay_type_params[:routing_number]
       payment_details[:account] = pay_type_params[:account_number]
     when "Credit card"
       payment_method = :credit_card
-      month,year = pay_type_params[:expiration_date].split(//)
+      month,year = pay_type_params[:expiration_date].split('/')
       payment_details[:cc_num] = pay_type_params[:credit_card_number]
       payment_details[:expiration_month] = month
       payment_details[:expiration_year] = year
@@ -43,7 +43,8 @@ class Order < ApplicationRecord
     )
 
     if payment_result.succeeded?
-      OrderMailer.received(self).deliver_later
+      @order = Order.find_by(id: order_id)
+      OrderMailer.received(@order).deliver_now
     else
       raise payment_result.error
     end

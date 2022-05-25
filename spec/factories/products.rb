@@ -23,9 +23,11 @@ FactoryBot.define do
     I lost another fight
     Lost to myself, but I'll just start again"
     end
-    image_url do
-      'https://insidethemagic.net/wp-content/uploads/2016/12/zootopia1.jpg'
-    end
     price { 50 }
   end
+
+  trait :image do
+    image_data { TestData.image_data }
+  end
+
 end

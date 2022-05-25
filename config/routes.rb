@@ -1,8 +1,12 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users, controllers: {
         registrations: 'users/registrations',
         sessions: 'users/sessions'
   }
+  # check the sidekiq activity on http://localhost:3000/sidekiq
+  mount Sidekiq::Web => 'sidekiq'
 
   root 'store#index'
   resources :products do

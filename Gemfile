@@ -23,10 +23,12 @@ gem 'sidekiq', "~> 6.4"
 gem 'devise'
 
 gem 'i18n', '~> 1.10'
+gem 'sendgrid-ruby'
 gem 'slim-rails'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
+gem "shrine", "~> 3.4"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -37,6 +39,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
+  gem "letter_opener" #preview email
   gem 'prettier'
   gem 'pry', '~> 0.13.1'
   gem 'rails-controller-testing'
@@ -58,6 +61,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'rspec-sidekiq'
   gem 'selenium-webdriver'
 
   # Easy installation and use of web drivers to run system tests with browsers

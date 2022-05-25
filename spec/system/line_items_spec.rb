@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "LineItems/ create", type: :system, js: true do
+RSpec.describe "LineItems/ create", type: :system do
   let(:product) { create_list(:product, 2) }
 
   scenario "add highlight css class" do
