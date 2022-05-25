@@ -1,6 +1,8 @@
 header
   h1 Pragmatic Catalog
-  p = session_counter_greater_than_five(session[:counter])
+  - if user_signed_in? && @cart
+    = link_to image_tag('cart.svg', size: '30', alt: 'go to your shopping cart')
+  span = session_counter_greater_than_five(session[:counter])
 ul.catalog
   - @products.each do |product|
     li

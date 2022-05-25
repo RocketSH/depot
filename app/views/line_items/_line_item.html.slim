@@ -7,6 +7,6 @@ tr class="#{ line_item == @current_item ? 'line-item-highlight' : ''}"
   td.price
     = number_to_currency(line_item.subtotal, locale: :pl)
   td.update-item
-    = link_to "Add (+1)", line_item_add_path(id: :line_item), method: :post
-    = link_to "Reduce (-1)", line_item_reduce_path(id: :line_item), method: :post
+    = link_to "Add (+1)", line_item_add_path(line_item), method: :post
+    = link_to "Reduce (-1)", line_item_reduce_path(line_item), method: :post
     = link_to "Remove item", line_item_path(line_item), method: :delete

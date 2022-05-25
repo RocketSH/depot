@@ -1,37 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe 'Carts', type: :request do
-  let(:cart) { create(:cart) }
-  let(:product_one) { create(:zootopia) }
-  let(:product_two) { create(:product) }
-  let(:invalid_cart_test) { { id: 'not_a_valid_id' } }
+  let(:user) { create(:user)}
+  let(:cart) { Cart.create(user_id: user.id)}
+  let(:product_1) { create(:zootopia) }
+  let(:product_2) { create(:product) }
+  let(:invalid_cart) { { id: 'not_a_valid_id' } }
 
   before do
-    cart.add_product(product_one).save!
-    cart.add_product(product_two).save!
+    cart.add_product(product_1).save!
+    cart.add_product(product_2).save!
   end
 
   describe 'GET /show' do
     context 'with valid cart' do
       it 'renders a successful response' do
-        allow_any_instance_of(ActionDispatch::Request).to receive(:session) {
-          { cart_id: cart.id }
-        }
-
+        sign_in(user)
         get cart_path(cart)
         expect(response).to be_successful
       end
     end
 
     context 'with invalid cart' do
-      it 'rescue ActiveRecord::RecordNotFound' do
-        get '/carts/:id', params: { id: invalid_cart_test[:id] }
-        expect(response).to redirect_to(root_url)
-        follow_redirect!
-        expect(response).to render_template('store/index')
-        expect(response.body).to include(
-          'Sorry, you are querying an invalid cart'
-        )
+      it 'the user only can retrieve their own cart' do
+        sign_in(user)
+        get '/carts/:id', params: { id: invalid_cart[:id] }
+        expect(response).to render_template('carts/show')
+        expect(cart.user_id).to eq user.id
       end
     end
   end
@@ -39,31 +34,16 @@ RSpec.describe 'Carts', type: :request do
   describe 'DELETE / destroy' do
     context 'with valid cart' do
       it 'destroys current cart' do
+        sign_in(user)
         expect(cart.line_items).not_to be_empty
-        allow_any_instance_of(ActionDispatch::Request).to receive(:session) {
-          { cart_id: cart.id }
-        }
-        delete cart_url(cart)
+        delete cart_path(cart)
         expect(Cart.find_by(id: cart.id)).to be_nil
       end
 
       it 'redirects to product catalog page' do
-        allow_any_instance_of(ActionDispatch::Request).to receive(:session) {
-          { cart_id: cart.id }
-        }
+        sign_in(user)
         delete cart_url(cart)
         expect(response).to redirect_to(root_url)
-      end
-    end
-
-    # TODO: to be refactored, since the mock session always pass with an invalid cart id
-    context 'with invalid cart' do
-      it 'destroys an invalid cart' do
-        allow_any_instance_of(ActionDispatch::Request).to receive(:session) {
-          { cart_id: invalid_cart_test[:id] }
-        }
-        delete cart_url(invalid_cart_test)
-        expect(response).to redirect_to(cart_url)
       end
     end
   end
