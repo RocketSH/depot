@@ -3,7 +3,7 @@ class StoreController < ApplicationController
 
   def index
     @products = Product.order(:title)
-    @cart = Cart.find(session[:cart_id]) if session[:cart_id]
+    @cart = Cart.find_by(user_id: current_user.id) if current_user
   end
 
   private
