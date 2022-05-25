@@ -1,7 +1,7 @@
 class LineItem < ApplicationRecord
   # optional: true, the association will not have its presence validated
   belongs_to :product
-  belongs_to :cart, optional: true
+  belongs_to :cart
   belongs_to :order, optional: true
 
   validates :product_id, :price, presence: true

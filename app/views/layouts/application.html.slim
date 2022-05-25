@@ -34,8 +34,13 @@ html
             a href="/news" News
           li
             a href="/contact" Contact
-          .carts
-            = render_if @cart && @cart.line_items.any?, @cart
+          - if user_signed_in?
+            .carts
+              = render_if @cart && @cart.line_items.any?, @cart
 
       main class=controller.controller_name
+        - if notice
+          aside#notice = notice
+        - if alert
+          aside#alert = alert
         = yield

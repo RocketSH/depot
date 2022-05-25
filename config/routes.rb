@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get :who_bought, on: :member
   end
 
+  post 'carts', to: 'carts#create'
   get 'carts/:id', to: 'carts#show', as: 'cart'
   delete 'carts/:id', to: 'carts#destroy'
 

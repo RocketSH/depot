@@ -1,6 +1,3 @@
-- if notice
-  aside#notice = notice
-
 header
   h1 Pragmatic Catalog
   p = session_counter_greater_than_five(session[:counter])
@@ -9,7 +6,7 @@ ul.catalog
     - @products.each do |product|
       - cache product do
         li
-          = image_tag(product.image_url)
+          / = image_tag(product.image_url)
           h2 = product.title
           p = sanitize(product.description)
           .price = number_to_currency(product.price, locale: :pl)
