@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe OrderMailer, type: :mailer do
+RSpec.describe OrderMailer, type: :mailer, pending: true do
   let(:order) { create(:order, :credit_card) }
 
   describe "received" do

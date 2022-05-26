@@ -28,9 +28,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @order.update(order_params)
       redirect_to order_url(@order),
