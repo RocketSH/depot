@@ -1,5 +1,6 @@
+require 'sendgrid-ruby'
+
 class OrderMailer < ApplicationMailer
-  require 'sendgrid-ruby'
   include SendGrid
 
   def received(order)
@@ -9,7 +10,6 @@ class OrderMailer < ApplicationMailer
 
   def shipped(order)
     @order = order
-
-    mail to: order.email, subject: 'Świat Zabawek Store Order Shipped'
+    mail(from: 'Świat Zabawek <shu-han@llinformatics.com>' ,to: @order.email, subject: 'Świat Zabawek Store Order Shipped')
   end
 end

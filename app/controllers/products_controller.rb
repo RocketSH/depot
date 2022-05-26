@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy who_bought]
+  skip_before_action :authenticate_user!, only: [:show]
 
   def index
     @products = Product.all.order(:title)
@@ -32,8 +33,11 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy
-    redirect_to @product, notice: 'Product was successfully deleted.'
+    if @product.destroy
+      redirect_to @product, notice: 'Product was successfully deleted.'
+    else
+      redirect_to @product, notice: 'Product can not be deleted.'
+    end
   end
 
   def who_bought

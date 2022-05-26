@@ -6,7 +6,7 @@ header
 ul.catalog
   - @products.each do |product|
     li
-      td = render_if_profile(product)
+      td = link_to render_if_profile(product), product
       h2 = product.title
       p = sanitize(product.description)
       .price = number_to_currency(product.price, locale: :pl)
