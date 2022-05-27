@@ -5,7 +5,7 @@ class CartsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invaild_cart
 
   def show
-    render layout: "no_cart"
+    render layout: "authentication"
   end
 
   def destroy

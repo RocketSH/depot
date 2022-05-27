@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Orders', type: :request do
   let(:user) { create(:user)}
+  let(:order) { Order.new(name: "Buzz Lightyear", address: "Pixar Animation Studios", email: "buzz@pixar.com", user_id: user.id, pay_type: "Credit card")}
   let(:cart) { Cart.create(user_id: user.id) }
   let(:empty_cart) { FactoryBot.build(:cart) }
-  let(:order) { build(:order, :purchase_order) }
 
   describe 'GET /new' do
     context 'with not empty cart' do
@@ -33,18 +33,21 @@ RSpec.describe 'Orders', type: :request do
     context 'with valid order' do
       it 'creates a order' do
         sign_in(user)
-        # TODO: to be fixed
-        # expect do
-          post orders_path(order),
+        cart
+        expect(Order.count).to eq 0
+        expect(Cart.count).to eq 1
+        expect do
+          post "/orders",
             params: {
               order: {
                 name: order.name,
                 address: order.address,
                 email: order.email,
                 pay_type: order.pay_type,
-              }
-            }.merge(user_id: user.id)
-        # end.to change(Order, :count).by(1)
+              }.merge(user_id: user.id)
+            }
+        end.to change(Order, :count).by(1)
+        expect(Cart.count).to eq 0
       end
 
       it 'redirects to the homepage' do

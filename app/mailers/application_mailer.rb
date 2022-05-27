@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'shu-han@llinformatics.com'
+  default from: Rails.application.credentials.sendgrid[:email]
   layout 'mailer'
 end

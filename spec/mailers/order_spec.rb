@@ -14,7 +14,7 @@ RSpec.describe OrderMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Świat Zabawek Store Order Confirmation")
       expect(mail.to).to eq([order.email])
-      expect(mail.from).to eq(["shu-han@llinformatics.com"])
+      expect(mail.from).to eq([Rails.application.credentials.sendgrid[:email]])
     end
 
     it "renders the body" do
@@ -28,7 +28,7 @@ RSpec.describe OrderMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Świat Zabawek Store Order Shipped")
       expect(mail.to).to eq([order.email])
-      expect(mail.from).to eq(["shu-han@llinformatics.com"])
+      expect(mail.from).to eq([Rails.application.credentials.sendgrid[:email]])
     end
 
     it "renders the body" do
