@@ -6,11 +6,13 @@
   header
     display: flex
     a
-      padding: .7rem
-    p
-      margin: 1rem 0
+      padding: .7rem 0 .7rem .5rem
+    span
+      align-self: center
+      color: $dark-border
       vertical-align: middle
       line-height: inherit
+      padding-left: .5rem
 
   ul.catalog
     border-top: solid .25em
@@ -37,7 +39,6 @@
       .price
         font-size: 1.414em
 
-      // button_to create a form for us
       form, div
         display: inline
         margin-left: .5rem
@@ -45,9 +46,10 @@
       input[type="submit"]
         background-color: $secondary
         border-radius: .354em
-        border: solid thin $primary
+        border: none
         color: white
         font-size: 1em
         padding: .354em 1em
         &:hover
-          background-color: $primary
+          transition: $transition
+          text-shadow: $text-shadow

@@ -1,13 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe "Products", type: :system do
+  user = FactoryBot.create(:user)
+  let(:zootopia) { create(:zootopia) }
+
   before do
     driven_by(:rack_test)
   end
 
-  let(:zootopia) { create(:zootopia) }
-
   it "Update a exist product" do
+    login_as(user, scope: :user)
     visit edit_product_path(zootopia)
 
     fill_in "Title", with: "Shakira is the best!"

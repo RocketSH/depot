@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_20_211909) do
+ActiveRecord::Schema.define(version: 2022_05_24_201603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2022_05_20_211909) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_carts_on_user_id", unique: true
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -55,13 +57,15 @@ ActiveRecord::Schema.define(version: 2022_05_20_211909) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "name"
-    t.text "address"
-    t.string "email"
-    t.integer "pay_type"
+    t.string "name", null: false
+    t.text "address", null: false
+    t.string "email", null: false
+    t.integer "pay_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "ship_date"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -93,7 +97,9 @@ ActiveRecord::Schema.define(version: 2022_05_20_211909) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "carts", "users"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
+  add_foreign_key "orders", "users"
 end

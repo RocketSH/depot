@@ -22,18 +22,18 @@
         text-align: right
 
     td.update-item
+      display: flex
+      flex-direction: column
+      width: max-content
       a
-        display: flex
         text-decoration: none
-        border: 1px solid $dark-border
-        border-radius: 30px
-        padding: 0.5em 1em
-        color: black
-        align-content: center
-        align-items: center
+        padding: 0.1rem .2rem
+        font-size: smaller
+        color: $dark-border
         &:hover
-          background-color: lighten($font-color, 70%)
-          transition: $transition
+          transition: all 0.1s ease-in-out
+          border: 2px solid $dark-border
+          border-radius: 5px
 
         img
           margin-right: .5rem
@@ -51,21 +51,19 @@ tfoot
 
 .cart-actions
   display: flex
-  gap: .5em
+  gap: 1em
   flex-direction: row-reverse
 
   input[type="submit"]
     margin-top: 1rem
-    background-color: $notice-color
+    background-color: #bbb
+    border: solid thin #bbb
     border-radius: 0.354em
-    border: solid thin $notice-color
     color: $bg-color
     font-size: 1em
     padding: 0.5rem 1em
     &:hover
-      background-color: $secondary
-      border: solid thin $secondary
-      color: $bg-color
+      border: solid 1px $dark-border
       transition: $transition
 
   input[type="submit"].checkout
@@ -74,5 +72,5 @@ tfoot
     color: black
     font-weight: bold
     &:hover
-      background-color: #9d9
-
+      transition: $transition
+      border: solid 1px $dark-border

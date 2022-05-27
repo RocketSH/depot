@@ -7,7 +7,7 @@ FactoryBot.define do
   factory :product do
     title { generate(:product_title) }
     description { Faker::Books::Dune.quote }
-    image_url { Faker::Avatar.image + '.jpg' }
+    image_data { TestData.image_data }
     price { Faker::Number.between(from: 0.01, to: 99).round(2) }
   end
 
@@ -23,11 +23,7 @@ FactoryBot.define do
     I lost another fight
     Lost to myself, but I'll just start again"
     end
+    image_data { TestData.image_data }
     price { 50 }
   end
-
-  trait :image do
-    image_data { TestData.image_data }
-  end
-
 end

@@ -7,25 +7,25 @@ class OrdersController < ApplicationController
     @products = Order.includes(line_items: :product).find(params[:id])
   end
 
+  def index
+    @orders = current_user.orders
+  end
+
   def new
     @order = Order.new
   end
 
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(order_params.merge(user_id: current_user.id))
     @order.add_line_items_from_cart(@cart)
 
     if @order.save
-      Cart.destroy(session[:cart_id])
-      session[:cart_id] = nil
+      Cart.destroy(@cart.id)
       ChargeOrderJob.perform_later(@order.id, order_params[:pay_type], pay_type_params)
       redirect_to root_url, notice: 'Thank you for your order.'
     else
       render :new
     end
-  end
-
-  def edit
   end
 
   def update
@@ -46,8 +46,8 @@ class OrdersController < ApplicationController
   private
 
   def set_cart
-    if session[:cart_id]
-      @cart = Cart.find(session[:cart_id])
+    if current_user.cart
+      @cart = Cart.find_by(user_id: current_user.id)
     else
       redirect_to root_url, notice: 'Your cart is empty.'
     end

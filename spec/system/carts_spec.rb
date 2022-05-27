@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "LineItems/ create", type: :system do
+  user = FactoryBot.create(:user)
   let(:product) { create(:zootopia) }
   let(:cart) { create(:cart) }
 
   scenario "add a cart" do
+    login_as(user, scope: :user)
     visit root_path(product)
 
     expect(page).to have_no_css('.carts')
@@ -23,6 +25,7 @@ RSpec.describe "LineItems/ create", type: :system do
   end
 
   scenario "LineItems/ destroy" do
+    login_as(user, scope: :user)
     visit root_path(product)
 
     expect(page).to have_no_css('.carts')

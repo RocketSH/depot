@@ -1,0 +1,15 @@
+h2 All Orders
+
+- @orders.each do |order|
+  p
+    | Name: #{order.name}
+  p
+    | Adress: #{order.address}
+  p
+    | Email: #{order.email}
+  p Line Items:
+  ul
+    - order.line_items.each do |item|
+      li
+        = item.quantity
+        | x #{item.product.title}

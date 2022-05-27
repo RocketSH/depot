@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe OrderMailer, type: :mailer do
-  let(:order) { create(:order, :credit_card) }
+  let(:user) { create(:user)}
+  let(:order) { Order.create(name: "Buzz Lightyear", address: "Pixar Animation Studios", email: "buzz@pixar.com", user_id: user.id, pay_type: "Credit card")}
 
   describe "received" do
     let(:mail) { OrderMailer.received(order).deliver_now }
@@ -13,7 +14,7 @@ RSpec.describe OrderMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Świat Zabawek Store Order Confirmation")
       expect(mail.to).to eq([order.email])
-      expect(mail.from).to eq(["shu-han@llinformatics.com"])
+      expect(mail.from).to eq([Rails.application.credentials.sendgrid[:email]])
     end
 
     it "renders the body" do
@@ -27,7 +28,7 @@ RSpec.describe OrderMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Świat Zabawek Store Order Shipped")
       expect(mail.to).to eq([order.email])
-      expect(mail.from).to eq(["from@example.com"])
+      expect(mail.from).to eq([Rails.application.credentials.sendgrid[:email]])
     end
 
     it "renders the body" do

@@ -1,12 +1,16 @@
 class LineItemsController < ApplicationController
   include CurrentCart
+  skip_before_action :authenticate_user!, only: [:create]
+  before_action :only => [:create] do
+    redirect_to new_user_session_path, notice: 'Please login before adding products to your cart.' unless current_user
+  end
   before_action :set_cart, only: %i[create destroy]
   before_action :set_line_item, only: %i[update destroy]
 
   def create
     product = Product.find(params[:product_id])
     @line_item = @cart.add_product(product)
-
+    
     respond_to do |format|
       if @line_item.save
         reset_counter
@@ -18,15 +22,30 @@ class LineItemsController < ApplicationController
     end
   end
 
-  def update
-    @line_item.minus_line_item_qty
+  def add_quantity
+    @line_item = LineItem.find(params[:id])
+    @line_item.quantity += 1
+    @line_item.save
+    redirect_to '/'
+  end
+  
+  def reduce_quantity
+    @line_item = LineItem.find(params[:id])
+    if @line_item.quantity > 1
+      @line_item.quantity -= 1
+    else
+      @line_item.destroy
+      session[:line_item_id] = nil
+    end
+    @line_item.save
+    redirect_to '/'
   end
 
   def destroy
     @line_item.destroy
     session[:line_item_id] = nil
 
-    redirect_to @cart, notice: 'Product was successfully removed from your shopping cart.'
+    redirect_to '/', notice: 'Product was successfully removed from your shopping cart.'
   end
 
   private

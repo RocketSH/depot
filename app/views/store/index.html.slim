@@ -1,13 +1,12 @@
-- if notice
-  aside#notice = notice
-
 header
   h1 Pragmatic Catalog
-  p = session_counter_greater_than_five(session[:counter])
+  - if user_signed_in? && @cart
+    = link_to image_tag('cart.svg', size: '30', alt: 'go to your shopping cart'), @cart
+  span = session_counter_greater_than_five(session[:counter])
 ul.catalog
   - @products.each do |product|
     li
-      td = render_if_profile(product)
+      td = link_to render_if_profile(product), product
       h2 = product.title
       p = sanitize(product.description)
       .price = number_to_currency(product.price, locale: :pl)
