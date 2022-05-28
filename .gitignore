@@ -36,3 +36,5 @@ yarn-debug.log*
 dist
 tags
 dump.rdb
+swiat-zabawek.dump
+booster.sh
