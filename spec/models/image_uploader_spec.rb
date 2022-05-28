@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ImageUploader do
-  let(:valid_image) { create(:zootopia, :image) }
+  let(:valid_image) { create(:zootopia) }
   let(:image) { valid_image.image}
   let(:derivatives) { valid_image.image_derivatives }
 

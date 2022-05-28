@@ -11,8 +11,17 @@ html
   body
     header.main
       = link_to image_tag('logo.svg', alt: 'The Pragmatic Bookshelf'), '/'
-      h1
-        = @page_title
+      .account
+        - if user_signed_in?
+          p Hello, #{ current_user.name }
+          .nav-links
+            = link_to 'Edit profile', edit_user_registration_path
+            = link_to "Logout", destroy_user_session_path, method: :delete
+
+        - else
+          .nav-links.login
+            = link_to "Sign up", new_user_registration_path
+            = link_to "Login", new_user_session_path
 
     section.content
       nav.side_nav
@@ -20,13 +29,18 @@ html
           li
             span = time_now
           li
-            a href="/questions" Questions
+            a href="/#" Questions
           li
-            a href="/news" News
+            a href="/#" News
           li
-            a href="/contact" Contact
-          .carts
-            = render_if @cart && @cart.line_items.any?, @cart
+            a href="/#" Contact
+          - if user_signed_in?
+            .carts
+              = render_if @cart && @cart.line_items.any?, @cart
 
       main class=controller.controller_name
+        - if notice
+          aside#notice = notice
+        - if alert
+          aside#alert = alert
         = yield

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  let(:product) { create(:product, :image) }
+  let(:product) { create(:product) }
 
   context 'create& save product validation' do
     it 'is valid with valid attributes' do

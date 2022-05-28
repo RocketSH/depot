@@ -1,66 +1,73 @@
 require 'rails_helper'
 
 RSpec.describe 'LineItems', type: :request do
-  subject(:valid_product) { create(:product) }
+  let(:user) { create(:user)}
+  subject(:product_1) { create(:product) }
   subject(:invalid_product) do
     { 'id' => 'a', 'title' => '1', 'description' => '' }
   end
-  subject(:zootopia) { create(:zootopia) }
+  subject(:product_2) { create(:zootopia) }
+  let(:cart) { Cart.create(user_id: user.id)}
 
   describe 'POST /create' do
     context 'with valid product' do
       it 'creates a new line item' do
-        expect { post line_items_path(product_id: valid_product) }.to change(
+        sign_in(user)
+        expect { post line_items_path(product_id: product_1), xhr: true }.to change(
           LineItem,
           :count,
         ).by(1)
       end
 
       it 'redirects to the homepage' do
-        post line_items_path(product_id: valid_product)
-
-        # 302 redirect: temporarily moved
+        sign_in(user)
+        post line_items_path(product_id: product_1)
         expect(response).to have_http_status(302)
-
-        cart = Cart.last
         expect(response).to redirect_to(root_url)
       end
 
       it 'add duplicate products to a cart' do
-        5.times { post line_items_path(product_id: zootopia) }
+        sign_in(user)
+        cart
+        5.times { post line_items_path(product_id: product_1) }
 
-        zoo_cart = Cart.last
-        expect(zoo_cart.line_items.count).to eq(1)
-        expect(zoo_cart.line_items.first['quantity']).to eq(5)
-      end
-    end
-
-    context 'with invalid/ non-exist product' do
-      it 'does not create a new line item' do
-        expect do
-          post line_items_path(product_id: invalid_product)
-        end.to raise_error(ActiveRecord::RecordNotFound)
+        expect(cart.line_items.count).to eq(1)
+        expect(cart.line_items.first['quantity']).to eq(5)
       end
     end
   end
 
-  describe 'PATCH /update' do
+  describe 'revise quantity' do
     context 'with valid parameters' do
-      it 'line item quantity minus 1& redirects to the cart' do
+      it 'minus 1' do
+        sign_in(user)
         line_item = create(:line_item, quantity: 5)
-        put line_item_path(line_item)
+        post line_item_reduce_path(line_item)
         line_item.reload
         expect(line_item.quantity).to eq(4)
+      end
+
+      it 'add 1' do
+        sign_in(user)
+        line_item = create(:line_item, quantity: 1)
+        post line_item_add_path(line_item)
+        line_item.reload
+        expect(line_item.quantity).to eq(2)
       end
     end
   end
 
   describe 'DELETE /destroy' do
     it 'destroys the requested line_item when qty == 1' do
-      line_item = create(:line_item)
-      expect { put line_item_path(line_item) }.to change(LineItem, :count).by(
-        -1,
-      )
+      sign_in(user)
+      line_item = create(:line_item, quantity: 1)
+      expect { post line_item_reduce_path(line_item) }.to change(LineItem, :count).by(-1)
+    end
+
+    it 'destroys line item' do
+      sign_in(user)
+      line_item = create(:line_item, quantity: 5)
+      expect { delete line_item_path(line_item) }.to change(LineItem, :count).by(-1)
     end
   end
 end

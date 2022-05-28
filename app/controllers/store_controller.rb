@@ -1,11 +1,12 @@
 class StoreController < ApplicationController
   include RescueInvalidCart
+  skip_before_action :authenticate_user! 
   before_action :increment_counter
   rescue_from ActiveRecord::RecordNotFound, with: :invaild_cart
 
   def index
     @products = Product.order(:title)
-    @cart = Cart.find(session[:cart_id]) if session[:cart_id]
+    @cart = Cart.find_by(user_id: current_user.id) if current_user
   end
 
   private

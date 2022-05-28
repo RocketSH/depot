@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ChargeOrderJob, type: :system do
+  user = FactoryBot.create(:user)
   let(:product) { create_list(:product, 2) }
 
   describe "#perform_later" do
@@ -10,6 +11,7 @@ RSpec.describe ChargeOrderJob, type: :system do
     end
 
     it "submit checkout form with pay_type: check" do
+      login_as(user, scope: :user)
       visit root_path(product)
 
       expect(Order.count).to eq 0
