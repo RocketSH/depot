@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   # check the sidekiq activity on http://localhost:3000/sidekiq
   mount Sidekiq::Web => 'sidekiq'
 
+  authenticate :product do
+    mount Shrine.presign_endpoint(:cache) => 'presign'
+  end
+
+  match '*all,' controller: 'application', action: 'cors_preflight_check', via: [:options]
+
   root 'store#index'
   resources :products do
     get :who_bought, on: :member
