@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :users, controllers: {
         registrations: 'users/registrations',
         sessions: 'users/sessions'
@@ -12,7 +14,7 @@ Rails.application.routes.draw do
     mount Shrine.presign_endpoint(:cache) => 'presign'
   end
 
-  match '*all,' controller: 'application', action: 'cors_preflight_check', via: [:options]
+  # match '*all,' controller: 'application', action: 'cors_preflight_check', via: [:options]
 
   root 'store#index'
   resources :products do
