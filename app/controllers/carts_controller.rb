@@ -1,4 +1,4 @@
-class CartsController < ApplicationController
+class CartsController < DepotController
   include CurrentCart
   before_action :set_cart, only: %i[show destroy]
   include RescueInvalidCart

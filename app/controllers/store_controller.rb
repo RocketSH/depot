@@ -1,4 +1,4 @@
-class StoreController < ApplicationController
+class StoreController < DepotController
   include RescueInvalidCart
   skip_before_action :authenticate_user! 
   before_action :increment_counter

@@ -1,4 +1,4 @@
-class LineItemsController < ApplicationController
+class LineItemsController < DepotController
   include CurrentCart
   skip_before_action :authenticate_user!, only: [:create]
   before_action :only => [:create] do

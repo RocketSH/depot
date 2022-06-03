@@ -1,4 +1,4 @@
-class ProductsController < ApplicationController
+class ProductsController < DepotController
   before_action :set_product, only: %i[show edit update destroy who_bought]
   skip_before_action :authenticate_user!, only: [:show]
 

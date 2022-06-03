@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class OrdersController < DepotController
   before_action :set_cart, only: %i[new create]
   before_action :ensure_cart_isnt_empty, only: :new
   before_action :set_order, only: %i[edit update destroy]
