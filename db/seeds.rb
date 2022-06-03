@@ -54,13 +54,11 @@ Product.create!(title: 'Programming Crystal',
   price: 40.00)
 # . . .
 
-User.delete_all
 User.create!(name: 'Tony',surname: 'Stark', email: 'lllatia_hyatt@welch.com', password: 'qazwsx')
 # . . .
 
 User.create!(name: 'Stephen',surname: 'Strange', email: 'jed_rolfson@stiedemann-reichel.biz', password: '6!%@zru%gVpuyY!&EKtCUdQAb')
 # . . .
 
-AdminUser.delete_all
 AdminUser.create!(email: 'admin@example.com', password: 'password')
 

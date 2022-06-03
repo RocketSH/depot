@@ -12,6 +12,7 @@ class ProductsController < DepotController
 
   def create
     @product = Product.new(product_params)
+    @product.image_resize if product_params[:image]
 
     if @product.save
       redirect_to product_url(@product), notice: 'Product was successfully created.'
@@ -22,13 +23,12 @@ class ProductsController < DepotController
 
   def update
     if @product.update(product_params)
-
       redirect_to product_url(@product), notice: 'Product was successfully updated.'
 
       @products = Product.all.order(:title)
       ActionCable.server.broadcast 'products', html: render_to_string('store/index', layout: false)
     else
-      render 'edit', notice: @product.errors.to_s
+      render 'edit', notice: 'Product can not be deleted.'
     end
   end
 

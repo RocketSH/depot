@@ -17,11 +17,11 @@ table
           ul
             li
               = link_to 'Show', product
-          - if current_user && current_user.admin
-            li
-              = link_to 'Edit', edit_product_path(product)
-            li
-              = link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
+            - if current_user && current_user.admin
+              li
+                = link_to 'Edit', edit_product_path(product)
+              li
+                = link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
   tfoot
   - if current_user && current_user.admin
     tr

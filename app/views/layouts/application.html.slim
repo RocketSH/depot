@@ -30,10 +30,10 @@ html
             span = time_now
           li
             = link_to 'Order List', orders_path
-        - if current_user && current_user.admin
-          li
-            = link_to 'Product List', products_path
-            a href="/#" 
+          - if current_user && current_user.admin
+            li
+              = link_to 'Product List', products_path
+              a href="/#" 
           - if user_signed_in?
             .carts
               = render_if @cart && @cart.line_items.any?, @cart
