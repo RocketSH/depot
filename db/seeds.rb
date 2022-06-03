@@ -16,7 +16,7 @@ Product.create!(title: 'Docker for Rails Developers',
       as Docker transforms the massive leap of deploying your app in the cloud 
       into a baby step.
       </p>},
-  image_url: 'ridocker.jpg',
+  # image_url: 'ridocker.jpg',
   price: 38.00)
 # . . .
 Product.create!(title: 'Build Chatbot Interactions',
@@ -33,7 +33,7 @@ Product.create!(title: 'Build Chatbot Interactions',
       can participate. Exercise your creativity by creating chatbot 
       skills for communicating, information, and fun.
       </p>},
-  image_url: 'dpchat.jpg',
+  # image_url: 'dpchat.jpg',
   price: 20.00)
 # . . .
 
@@ -50,5 +50,17 @@ Product.create!(title: 'Programming Crystal',
       tooling. Now you can write beautiful code that runs faster, scales better, 
       and is a breeze to deploy.
       </p>},
-  image_url: 'crystal.jpg',
+  # image_url: 'crystal.jpg',
   price: 40.00)
+# . . .
+
+User.delete_all
+User.create!(name: 'Tony',surname: 'Stark', email: 'lllatia_hyatt@welch.com', password: 'qazwsx')
+# . . .
+
+User.create!(name: 'Stephen',surname: 'Strange', email: 'jed_rolfson@stiedemann-reichel.biz', password: '6!%@zru%gVpuyY!&EKtCUdQAb')
+# . . .
+
+AdminUser.delete_all
+AdminUser.create!(email: 'admin@example.com', password: 'password')
+

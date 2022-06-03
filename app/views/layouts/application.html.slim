@@ -29,11 +29,11 @@ html
           li
             span = time_now
           li
-            a href="/#" Questions
+            = link_to 'Order List', orders_path
+        - if current_user && current_user.admin
           li
-            a href="/#" News
-          li
-            a href="/#" Contact
+            = link_to 'Product List', products_path
+            a href="/#" 
           - if user_signed_in?
             .carts
               = render_if @cart && @cart.line_items.any?, @cart

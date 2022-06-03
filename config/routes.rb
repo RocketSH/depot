@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     mount Shrine.presign_endpoint(:cache) => 'presign'
   end
 
-  # match '*all,' controller: 'application', action: 'cors_preflight_check', via: [:options]
+  # match '*all', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
   root 'store#index'
   resources :products do
