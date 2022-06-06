@@ -13,6 +13,19 @@ class Product < ApplicationRecord
             length: { minimum: 3 },
             format: { with: /\A([A-Z]|\d)/, message: 'must begin with first letter Uppercase or Digital number' }
 
+  def file_remote_url=(url)
+    return if url.blank?
+    @file_remote_url = url
+    file_attacher(cache: :cache_url)
+    self.file = JSON.dump(
+      id: url,
+      storage: :cache_url,
+      metadata: { filename: File.basename(URI(url).path) }
+    )
+  rescue URI::InvalidURIError, Down::Error
+    file_attacher.errors << "invalid URL"
+  end
+
   private
 
   def ensure_not_referenced_by_any_line_item
@@ -22,6 +35,7 @@ class Product < ApplicationRecord
   end
 
   def image_resize
+    self.image_validate
     self.image_derivatives!
   end
 end

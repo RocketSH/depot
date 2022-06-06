@@ -19,9 +19,4 @@ class ImageUploader < Shrine
     validate_mime_type %w[image/jpg image/jpeg image/png]
   end
 
-  def generate_location(io, record: nil, name: nil, derivative: nil, **)
-    record_model = record.class.name.to_s.downcase
-    name = super # the default unique identifier
-    [record_model, name].compact.join(‘/’)
-  end
 end

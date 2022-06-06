@@ -18,18 +18,19 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
+gem 'devise'
 gem 'redis', '~> 4.0'
 gem 'sidekiq', "~> 6.4"
-gem 'devise'
 
 gem 'i18n', '~> 1.10'
 gem 'sendgrid-ruby'
 gem 'slim-rails'
 
 # Use Active Storage variant
+gem "aws-sdk-s3", "~> 1.14"
 gem 'image_processing', '~> 1.2'
 gem "shrine", "~> 3.4"
-gem "aws-sdk-s3", "~> 1.14"
+gem 'shrine-url'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

@@ -10,9 +10,7 @@ Rails.application.routes.draw do
   # check the sidekiq activity on http://localhost:3000/sidekiq
   mount Sidekiq::Web => 'sidekiq'
 
-  authenticate :product do
-    mount Shrine.presign_endpoint(:cache) => 'presign'
-  end
+  mount Shrine.presign_endpoint(:cache) => 'presign'
 
   # match '*all', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
