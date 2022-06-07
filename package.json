@@ -12,7 +12,8 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "sass": "^1.49.8",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "uppy": "^2.11.0"
   },
   "version": "0.1.0",
   "devDependencies": {
@@ -30,5 +31,7 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md|sass|scss|)\""
   },
-  "extends": ["plugin:prettier/recommended"]
+  "extends": [
+    "plugin:prettier/recommended"
+  ]
 }

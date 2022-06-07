@@ -19,11 +19,11 @@ table
               = link_to 'Show', product
             - if current_user && current_user.admin
               li
-                = link_to 'Edit', edit_product_path(product)
+                = link_to 'Edit', edit_product_path(product), data: { turbolinks: false }
               li
                 = link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
   tfoot
   - if current_user && current_user.admin
     tr
       td colspan="3"
-        =link_to 'New Product', new_product_path
+        =link_to 'New Product', new_product_path, data: { turbolinks: false }

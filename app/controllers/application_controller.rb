@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def cors_preflight_check
-    return unless request.method == 'options'
+    return unless request.method == 'OPTIONS'
     cors_set_access_controll_headers
     render plain: ''
   end

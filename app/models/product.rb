@@ -13,17 +13,17 @@ class Product < ApplicationRecord
             length: { minimum: 3 },
             format: { with: /\A([A-Z]|\d)/, message: 'must begin with first letter Uppercase or Digital number' }
 
-  def file_remote_url=(url)
+  def image_remote_url=(url)
     return if url.blank?
-    @file_remote_url = url
-    file_attacher(cache: :cache_url)
-    self.file = JSON.dump(
+    @image_remote_url = url
+    image_attacher(cache: :cache_url)
+    self.image = JSON.dump(
       id: url,
       storage: :cache_url,
       metadata: { filename: File.basename(URI(url).path) }
     )
   rescue URI::InvalidURIError, Down::Error
-    file_attacher.errors << "invalid URL"
+    image_attacher.errors << "invalid URL"
   end
 
   private

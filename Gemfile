@@ -19,18 +19,16 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 gem 'devise'
-gem 'redis', '~> 4.0'
-gem 'sidekiq', "~> 6.4"
-
 gem 'i18n', '~> 1.10'
+gem 'redis', '~> 4.0'
 gem 'sendgrid-ruby'
+gem 'sidekiq', '~> 6.4'
 gem 'slim-rails'
 
 # Use Active Storage variant
-gem "aws-sdk-s3", "~> 1.14"
+gem 'aws-sdk-s3', '~> 1.14'
 gem 'image_processing', '~> 1.2'
-gem "shrine", "~> 3.4"
-gem 'shrine-url'
+gem 'shrine', '~> 3.4'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -43,7 +41,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
-  gem "letter_opener" #preview email
+  gem 'letter_opener' #preview email
   gem 'prettier'
   gem 'pry', '~> 0.13.1'
   gem 'rails-controller-testing'

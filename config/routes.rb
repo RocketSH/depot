@@ -1,6 +1,20 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  if Rails.env.test?
+    require 'ostruct'
+    presign_endpoint = Shrine.presign_endpoint(:cache, lambda do |id, _opts, req|
+      OpenStruct.new(url: "#{req.base_url}/attachments", key: "cache/#{id}")
+    end)
+    mount presign_endpoint => 'presign'
+    mount AttachmentUploader.upload_endpoint(:cache) => '/attachments'
+  else
+    mount Shrine.presign_endpoint(:cache) => 'presign/s3/params'
+    mount Shrine.presign_endpoint(:cache) => 'presign'
+  end
+
+  match '*all', controller: 'application', action: 'cors_preflight_check', via: [:options]
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: {
@@ -9,10 +23,6 @@ Rails.application.routes.draw do
   }
   # check the sidekiq activity on http://localhost:3000/sidekiq
   mount Sidekiq::Web => 'sidekiq'
-
-  mount Shrine.presign_endpoint(:cache) => 'presign'
-
-  # match '*all', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
   root 'store#index'
   resources :products do
