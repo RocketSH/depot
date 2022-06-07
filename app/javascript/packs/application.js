@@ -13,8 +13,6 @@ import XHRUpload from "@uppy/xhr-upload";
 import Dashboard from "@uppy/dashboard";
 import DragDrop from "@uppy/drag-drop";
 import AwsS3 from "@uppy/aws-s3";
-import French from "@uppy/locales/lib/fr_FR";
-import American from "@uppy/locales/lib/en_US";
 import "@uppy/core/dist/style.css";
 import "@uppy/dashboard/dist/style.css";
 
