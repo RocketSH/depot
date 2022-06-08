@@ -29,6 +29,7 @@ gem 'slim-rails'
 gem 'aws-sdk-s3', '~> 1.14'
 gem 'image_processing', '~> 1.2'
 gem 'shrine', '~> 3.4'
+gem 'shrine-url'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
