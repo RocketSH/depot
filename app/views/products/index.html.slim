@@ -18,10 +18,10 @@ table
             li
               = link_to 'Show', product
             li
-              = link_to 'Edit', edit_product_path(product)
+              = link_to 'Edit', edit_product_path(product), data: { turbolinks: false } 
             li
               = link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
   tfoot
     tr
       td colspan="3"
-        =link_to 'New Product', new_product_path
+        =link_to 'New Product', new_product_path, data: { turbolinks: false } 

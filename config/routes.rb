@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # check the sidekiq activity on http://localhost:3000/sidekiq
   mount Sidekiq::Web => 'sidekiq'
 
+  mount Shrine.presign_endpoint(:cache) => "/s3/params"
+
   root 'store#index'
   resources :products do
     get :who_bought, on: :member

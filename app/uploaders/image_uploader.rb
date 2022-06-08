@@ -1,7 +1,9 @@
 require "image_processing/mini_magick"
 
 class ImageUploader < Shrine
-  plugin :derivatives
+  plugin :derivatives, create_on_promote: true # Save image in multiple version
+  plugin :validation
+  plugin :validation_helpers
 
   Attacher.derivatives do |original|
     magick = ImageProcessing::MiniMagick.source(original)
@@ -13,7 +15,7 @@ class ImageUploader < Shrine
   end
 
   Attacher.validate do
-    validate_max_size 5*1024*1024, message: "is too large (max is 5 MB)"
+    validate_size 1..5*1024*1024
     validate_mime_type %w[image/jpg image/jpeg image/png]
   end
 end
