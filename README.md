@@ -1,8 +1,8 @@
 # Depot
 
-This self-learning project was learned from <Agile Web Development with Rails 6> by Sam Ruby and David Bryant Copeland.
+I learned from *Agile Web Development with Rails 6* by Sam Ruby and David Bryant Copeland.
 
-### [Website deployed to Heroku](https://swiat-zabawek-staging.herokuapp.com/)
+### [The demo website has deployed to Heroku](https://swiat-zabawek-staging.herokuapp.com/)
 
 ### Main features:
  - Users may browse and check the introduction of each item/ product without login
@@ -13,8 +13,19 @@ This self-learning project was learned from <Agile Web Development with Rails 6>
  - Users may checkout their shopping cart and create an order after inputting all necessary information (payment always assumes succeeded)
  - Order email address will receive a notification email, subject: 'Świat Zabawek Store Order Confirmation')
 
+### Critical Gems:
+ - `devise` for authentication
+ - `sidekiq` for background processing
+ - `shrine` for image attachment
+ - `image_processing`, through this gem I can process images with either ImageMagick/GraphicsMagick or libvips libraries. 
+ - `sendgrid-ruby` integrates Sendgrid email outbound service
+ - `rspec` replaces mini-test
+ - `capybara` achieves scenario tests, especially for Javascript function test
+
+ - slightly played with `activeadmin` to have a basic understanding about backend interface for an admin user
+
+
 ### Dependencies:
- - `git clone` this repo
  - local install `ruby 2.6.5` [Installation Method] (https://www.ruby-lang.org/en/documentation/installation/)
  - local install `rails 6.0.4`
  - local install `postgresql`
