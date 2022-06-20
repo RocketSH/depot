@@ -2,7 +2,7 @@
 
 I learned from *Agile Web Development with Rails 6* by Sam Ruby and David Bryant Copeland.
 
-### [The demo website has deployed to Heroku](https://swiat-zabawek-staging.herokuapp.com/)
+### [Live site on Heroku](https://swiat-zabawek-staging.herokuapp.com/)
 
 ### Main features:
  - Users may browse and check the introduction of each item/ product without login
