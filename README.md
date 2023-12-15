@@ -2,9 +2,7 @@
 
 I learned from *Agile Web Development with Rails 6* by Sam Ruby and David Bryant Copeland.
 
-### [Live site on Heroku](https://swiat-zabawek-staging.herokuapp.com/)
-
-### Main features:
+### Features:
  - Users may browse and check the introduction of each item/ product without login
  - Users may add an item to their own shopping cart after signing up and log in
  - Creating a new product needs an admin user
@@ -13,7 +11,7 @@ I learned from *Agile Web Development with Rails 6* by Sam Ruby and David Bryant
  - Users may checkout their shopping cart and create an order after inputting all necessary information (payment always assumes succeeded)
  - Order email address will receive a notification email, subject: 'Świat Zabawek Store Order Confirmation')
 
-### Critical Gems:
+### Main Gems:
  - `devise` for authentication
  - `sidekiq` for background processing
  - `shrine` for image attachment
